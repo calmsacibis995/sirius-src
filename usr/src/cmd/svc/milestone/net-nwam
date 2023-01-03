@@ -1,0 +1,116 @@
+#!/sbin/sh
+#
+# CDDL HEADER START
+#
+# The contents of this file are subject to the terms of the
+# Common Development and Distribution License (the "License").
+# You may not use this file except in compliance with the License.
+#
+# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+# or http://www.opensolaris.org/os/licensing.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+#
+# When distributing Covered Code, include this CDDL HEADER in each
+# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+# If applicable, add the following below this CDDL HEADER, with the
+# fields enclosed by brackets "[]" replaced with your own identifying
+# information: Portions Copyright [yyyy] [name of copyright owner]
+#
+# CDDL HEADER END
+#
+#
+# Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
+# Use is subject to license terms.
+#
+
+#ident	"%Z%%M%	%I%	%E% SMI"
+
+. /lib/svc/share/smf_include.sh
+. /lib/svc/share/net_include.sh
+
+#
+# In a shared-IP zone we need this service to be up, but all of the work
+# it tries to do is irrelevant (and will actually lead to the service
+# failing if we try to do it), so just bail out.
+# In the global zone and exclusive-IP zones we proceed.
+#
+smf_configure_ip || exit $SMF_EXIT_OK
+
+case "$1" in
+'refresh')
+	/usr/bin/pkill -HUP -z `smf_zonename` nwamd
+	;;
+
+'start')
+	if smf_is_globalzone; then
+		net_reconfigure || exit $SMF_EXIT_ERR_CONFIG
+
+		#
+		# Upgrade handling. The upgrade file consists of a series
+		# of dladm(1M) commands. Note that after we are done, we
+		# cannot rename the upgrade script file as the file system
+		# is still read-only at this point. Defer this to the
+		# manifest-import service.
+		#
+		upgrade_script=/var/svc/profile/upgrade_datalink
+		if [ -f "${upgrade_script}" ]; then
+			. "${upgrade_script}"
+		fi
+
+		# Initialize security objects.
+		/sbin/dladm init-secobj
+	fi
+	# start nwamd in foreground; it will daemonize itself
+	if /lib/inet/nwamd ; then
+		exit $SMF_EXIT_OK
+	else
+		exit $SMF_EXIT_ERR_FATAL
+	fi
+	;;
+
+'stop')
+	/usr/bin/pkill -z `smf_zonename` nwamd
+	;;
+
+'-u')
+	# After we run this part of the script upon the next reboot
+	# network/physical:default will be enabled and
+	# network/physical:nwam will be disabled.
+	# There are various other parts of the system (nscd, nfs) that
+	# depend on continuing to have a working network.  For this
+	# reason we don't change the network configuration immediately.
+	
+	SVCADM=/usr/sbin/svcadm
+	SVCCFG=/usr/sbin/svccfg
+	net_phys=svc:/network/physical:default
+	net_nwam=svc:/network/physical:nwam
+
+	# Disable network/physical temporarily and make sure that will
+	# be enabled on reboot.
+	$SVCADM disable -st $net_phys
+	$SVCCFG -s $net_phys setprop general/enabled=true
+
+	# If nwam is online then make sure that it's temporarily enabled.
+	nwam_online=`/usr/bin/svcprop -t -p restarter/state $net_nwam`	
+	if [ $? -eq 0 ]; then
+		set -- $nwam_online
+		[ $3 = "online" ] && $SVCADM enable -st $net_nwam
+	fi
+
+	# Set nwam so that it won't be enabled upon reboot.
+	$SVCCFG -s $net_nwam setprop general/enabled=false
+	exit 0
+	;;
+
+'-c')
+	# Nothing to do for sysidtool
+	exit 0
+	;;
+
+*)
+	echo "Usage: $0 { start | stop | refresh }"
+	exit $SMF_EXIT_ERR_FATAL
+	;;
+esac
+exit $SMF_EXIT_OK

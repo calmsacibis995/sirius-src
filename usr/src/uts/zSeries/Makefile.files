@@ -1,0 +1,262 @@
+#
+# CDDL HEADER START
+#
+# The contents of this file are subject to the terms of the
+# Common Development and Distribution License                  
+# (the "License").  You may not use this file except in compliance
+# with the License.
+#
+# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+# or http://www.opensolaris.org/os/licensing.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+#
+# When distributing Covered Code, include this CDDL HEADER in each
+# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+# If applicable, add the following below this CDDL HEADER, with the
+# fields enclosed by brackets "[]" replaced with your own identifying
+# information: Portions Copyright [yyyy] [name of copyright owner]
+#
+# CDDL HEADER END
+#
+# Copyright 2008 Sine Nomine Associates. All rights reserved.
+# Use is subject to license terms.
+#
+#
+# Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
+# Use is subject to license terms.
+#
+#	This Makefile defines all file modules for the directory uts/zSeries
+#	and its children. These are the source files which are zSeries
+#	"implementation architecture" dependent.
+#
+
+#
+#	object lists
+#
+CORE_OBJS +=	copy.o		\
+		ddi_arch.o	\
+		decompress.o	\
+		getcontext.o	\
+		ip_ocsum.o	\
+		polled_io.o	\
+		prmachdep.o	\
+		syscall.o	\
+		thunk.o  	\
+		xlate.o		
+
+#
+#	generic-unix module
+#
+GENUNIX_OBJS +=	install_utrap.o \
+		cpcmd.o		
+
+#
+#	Some objects must be linked at the front of the image (or
+#	near other objects at the front of the image).
+#
+SPECIAL_OBJS +=	
+
+#
+#			driver modules
+#
+CMLB_OBJS +=	cmlb.o
+SD_OBJS +=	sd.o sd_xbuf.o
+SSD_OBJS +=	sd.o sd_xbuf.o
+TRAPSTAT_OBJS	+= trapstat.o
+MEMTEST_OBJS	+= memtest.o memtest_asm.o 		\
+			memtest_u.o memtest_u_asm.o 	\
+			memtest_ch.o memtest_ch_asm.o 	\
+			memtest_chp.o memtest_chp_asm.o \
+			memtest_ja.o memtest_ja_asm.o 	\
+			memtest_jg.o memtest_jg_asm.o 	\
+			memtest_pn.o memtest_pn_asm.o 	\
+			memtest_cmp.o memtest_cmp_asm.o \
+			memtest_sf.o memtest_sf_asm.o 	\
+			memtest_sr.o memtest_sr_asm.o
+
+#
+#			kernel cryptographic framework
+#
+
+#AES_OBJS	+= aes.o aes_impl.o aes_cbc_crypt.o aes_crypt_asm.o
+
+#DES_OBJS	+= des_crypt_asm.o
+
+ARCFOUR_OBJS	+= arcfour.o arcfour_crypt.o
+
+#SHA1_OBJS	+= sha1_asm.o
+
+RSAPROV_OBJS    += mont_mulf.o
+
+#			ZFS file system module
+ZFS_OBJS +=		\
+	spa_boot.o
+
+#
+#			Misc modules
+#
+SBD_OBJS	+= sbd.o sbd_cpu.o sbd_mem.o sbd_io.o
+
+KRTLD_BOOT_OBJS += 
+
+KRTLD_OBJS +=				\
+		doreloc.o 		\
+		bootrd.o		\
+		ufsops.o		\
+		hsfs.o   		\
+		kobj_convrelstr.o 	\
+		kobj_crt.o		\
+		kobj_isa.o 		\
+		kobj_reloc.o
+
+SWAPGENERIC_OBJS += swapgeneric.o
+
+#
+#			cpu modules
+#
+CPU_OBJ		+= 
+
+#
+#			platform module
+#
+PLATMOD_OBJS		= platmod.o
+
+#
+#			CCW Autoconfigurator
+#
+CCWAUTO_OBJS		= ccw_autoconfig.o
+
+#
+#			Disk device driver
+#
+DIAG250_OBJS		= diag250_ll.o diag250_hl.o
+
+#
+#			Console device driver
+#
+CON3215_OBJS		= con3215.o
+
+#
+#			OSA device driver
+#
+OSA_OBJS		= osa.o
+
+#
+#			special files
+#
+MODSTUB_OBJ =	modstubs.o
+
+#	Section 3:	Misc.
+#
+ALL_DEFS	+= -Ds390x
+INC_PATH	+= -I$(UTSBASE)/zSeries -I$(UTSBASE)/$(PLATFORM) -I../ -I$(DSF_DIR)/$(OBJS_DIR)
+
+#
+# Since assym.h is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .make.state file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS	+= 
+
+#
+# Modules that require _depends_on to be set as gnu ld doesn't support -N flag
+#
+6TO4TUN_OBJS	+= 6to4tun_depends.o
+AESPROV_OBJS	+= aes_depends.o
+AMSRC2_OBJS	+= amsrc_depends.o
+ARP_OBJS	+= arp_depends.o
+ATUN_OBJS	+= atun_depends.o
+AV1394_OBJS	+= av1394_depends.o
+BGE_OBJS	+= bge_depends.o
+BLOWFISHPROV_OBJS += blowfish_depends.o
+CONSCONFIG_OBJS	+= consconfig_depends.o
+CONSKBD_OBJS	+= conskbd_depends.o
+CRYPTO_OBJS	+= crypto_depends.o
+CRYPTOADM_OBJS  += cryptoadm_depends.o
+CTF_OBJS	+= ctf_depends.o
+DCAM1394_OBJS	+= dcam1394_depends.o
+DES_OBJS	+= des_depends.o
+DEV_OBJS	+= dev_depends.o
+DLCOSMK_OBJS	+= dlcosmk_depends.o
+DLD_OBJS	+= dld_depends.o
+DLS_OBJS	+= dls_depends.o
+DPROV_OBJS	+= dprov_depends.o
+DSCPMK_OBJS	+= dscpmk_depends.o
+EHCI_OBJS	+= ehci_depends.o
+FASTTRAP_OBJS	+= fasttrap_depends.o
+FBT_OBJS	+= fbt_depends.o
+FLOWACCT_OBJS	+= flowacct_depends.o
+FSSNAP_OBJS	+= fssnap_depends.o
+HCI1394_OBJS	+= hci1394_depends.o
+HID_OBJS	+= hid_depends.o
+HIDPARSER_OBJS	+= hidparser_depends.o
+IB_OBJS		+= ib_depends.o
+HUBD_OBJS	+= hubd_depends.o
+IBCM_OBJS	+= ibcm_depends.o
+IBD_OBJS	+= ibd_depends.o
+IBDM_OBJS	+= ibdm_depends.o
+IBMF_OBJS	+= ibmf_depends.o
+ICMP_OBJS	+= icmp_depends.o
+ICMP6_OBJS	+= icmp6_depends.o
+IDMAP_OBJS	+= idmap_depends.o
+IP_OBJS		+= ip_depends.o
+IP6_OBJS	+= ip6_depends.o
+IPCMSG_OBJS	+= msgsys_depends.o
+IPCSEM_OBJS	+= semsys_depends.o
+IPCSHM_OBJS	+= shmsys_depends.o
+IPF_OBJS	+= ipf_depends.o
+IPGPC_OBJS	+= ipgpc_depends.o
+IPSECAH_OBJS	+= ipsecah_depends.o
+IPSECESP_OBJS	+= ipsecesp_depends.o
+KB8042_OBJS	+= kb8042_depends.o
+KEYSOCK_OBJS	+= keysock_depends.o
+KMDB_OBJS	+= kmdb_depends.o
+KSSL_OBJS	+= kssl_depends.o
+LOCKSTAT_OBJS	+= lockstat_depends.o
+MD5_OBJS	+= md5_depends.o
+MIXER_OBJS	+= mixer_depends.o
+NATTYMOD_OBJS	+= nattymod_depends.o
+NETI_OBJS	+= neti_depends.o
+NFS_DLBOOT_OBJS += nfs_dlboot_depends.o
+NFSSRV_OBJS	+= nfssrv_depends.o
+OHCI_OBJS	+= ohci_depends.o
+PROFILE_OBJS	+= profile_depends.o
+PX_PCI_OBJS	+= px_pci_depends.o
+RANDOM_OBJS	+= random_depends.o
+RGE_OBJS	+= rge_depends.o
+RPCIB_OBJS	+= rpcib_depends.o
+RPCMOD_OBJS	+= rpcmod_depends.o
+RSA_OBJS	+= rsa_depends.o
+RSM_OBJS	+= rsm_depends.o
+RTS_OBJS	+= rts_depends.o
+SCSA1394_OBJS	+= scsa1394_depends.o
+SCSA2USB_OBJS	+= scsa2usb_depends.o
+SCTP_OBJS	+= sctp_depends.o
+SCTP6_OBJS	+= sctp6_depends.o
+SDEV_NSCONFIG_MOD += sdev_nsconfig_mod_depends.o
+SDT_OBJS	+= sdt_depends.o
+SMBFS_OBJS	+= smbfs_depends.o
+SMBSRV_OBJS	+= smbsrv_depends.o
+SOCK_OBJS	+= sockfs_depends.o
+SOFTMAC_OBJS	+= softmac_depends.o
+SPDSOCK_OBJS	+= spdsock_depends.o
+STRPLUMB_OBJS	+= strplumb_depends.o
+SWRAND_OBJS	+= swrand_depends.o
+SYSTRACE_OBJS	+= systrace_depends.o
+TCP_OBJS	+= tcp_depends.o
+TCP6_OBJS	+= tcp6_depends.o
+TL_OBJS		+= tl_depends.o
+TOKENMT_OBJS	+= tokenmt_depends.o
+TSWTCLMT_OBJS	+= tswtclmt_depends.o
+TEM_OBJS	+= tem_depends.o
+TUN_OBJS	+= tun_depends.o
+UDP_OBJS	+= udp_depends.o
+UDP6_OBJS	+= udp6_depends.o
+UFS_OBJS	+= ufs_depends.o
+UGEN_OBJS	+= ugen_depends.o
+UHCI_OBJS	+= uhci_depends.o
+WC_OBJS		+= wc_depends.o
+ZFS_OBJS	+= zfs_depends.o

@@ -1,0 +1,74 @@
+#!/usr/bin/perl
+#
+# This is a very dumb script takes Sun 'mapfile' input (via STDIN) and outputs limited GAS symbol output
+#
+# Max Cohan (max@endpoint.com)
+#
+
+use IO::Handle;
+
+my $allow_notype = 0;
+
+my $data_in;
+my $data_out;
+
+# Set up fh to be STDIN/OUT
+$data_in = new_from_fd IO::Handle fileno(STDIN), "r";
+$data_out = new_from_fd IO::Handle fileno(STDOUT), "w";
+
+my $timestamp = localtime;
+
+print $data_out <<EOF;
+# 
+# Generated from map file via mapfile_gassifier ($timestamp)
+#
+EOF
+
+while (my $line = <$data_in>) {
+        next if $line =~ /^#/; # Ignore comments
+        next unless $line =~ /;/; # Ignore lines that don't have ';'
+        next if $line =~ /[{}]/; # Ignore braced blocks
+        next if $line =~ /\*/; # Ignore *s
+
+        if($line =~ /=/) {
+                $line =~ s/;.*$//;
+                my($symbol, $raw_type) = split /=/, $line;
+                $symbol =~ s/^\s+//;
+                $symbol =~ s/\s+$//;
+                $raw_type =~ s/^\s+//;
+                $raw_type =~ s/\s+$//;
+		next if $symbol eq '';
+
+                my $type;
+                if($raw_type =~ /FUNCTION/) {
+                        $type = 'function';
+                }
+		else {
+			next unless($allow_notype);
+		}
+                print $data_out gen_output($symbol, $type);
+        }
+        else {
+		next unless($allow_notype);
+
+                my $symbol = $line;
+                $symbol =~ s/;.*$//;
+                $symbol =~ s/^\s+//;
+                $symbol =~ s/\s+$//;
+                print $data_out gen_output($symbol);
+        }
+}
+
+sub gen_output {
+        my $symbol = shift;
+        my $type = shift;
+
+        my $out;
+        $out .= ".global $symbol\n";
+        $out .= ".set $symbol, 0\n";
+        $out .= ".type $symbol, $type\n" if $type;
+
+        $out .= "\n";
+
+        return $out;
+}

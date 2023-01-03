@@ -1,0 +1,204 @@
+#ifndef	_CONFIG_MSG_DOT_H
+#define	_CONFIG_MSG_DOT_H
+
+#ifndef	__lint
+
+typedef int	Msg;
+
+#define	MSG_ORIG(x)	&__sgs_msg[x]
+
+extern	const char *	_sgs_msg(Msg);
+
+#define	MSG_INTL(x)	_sgs_msg(x)
+
+
+#define	MSG_CONF_EDLIBPATH	1
+#define	MSG_CONF_EDLIBPATH_SIZE	19
+
+#define	MSG_CONF_ESLIBPATH	21
+#define	MSG_CONF_ESLIBPATH_SIZE	18
+
+#define	MSG_CONF_ADLIBPATH	40
+#define	MSG_CONF_ADLIBPATH_SIZE	20
+
+#define	MSG_CONF_ASLIBPATH	61
+#define	MSG_CONF_ASLIBPATH_SIZE	19
+
+#define	MSG_CONF_DIRCFG	81
+#define	MSG_CONF_DIRCFG_SIZE	16
+
+#define	MSG_CONF_OBJALT	98
+#define	MSG_CONF_OBJALT_SIZE	19
+
+#define	MSG_CONF_MEMRESV	118
+#define	MSG_CONF_MEMRESV_SIZE	18
+
+#define	MSG_CONF_ENVS	137
+#define	MSG_CONF_ENVS_SIZE	21
+
+#define	MSG_CONF_FLTR	159
+#define	MSG_CONF_FLTR_SIZE	19
+
+#define	MSG_CONF_DIRENT	179
+#define	MSG_CONF_DIRENT_SIZE	3
+
+#define	MSG_CONF_ALLENTS	183
+#define	MSG_CONF_ALLENTS_SIZE	11
+
+#define	MSG_CONF_NOEXIST	195
+#define	MSG_CONF_NOEXIST_SIZE	12
+
+#define	MSG_CONF_EXEC	208
+#define	MSG_CONF_EXEC_SIZE	4
+
+#define	MSG_CONF_OPTIONAL	213
+#define	MSG_CONF_OPTIONAL_SIZE	18
+
+#define	MSG_CONF_ALTER	235
+#define	MSG_CONF_ALTER_SIZE	9
+
+#define	MSG_CONF_DUMP	245
+#define	MSG_CONF_DUMP_SIZE	6
+
+#define	MSG_CONF_REALPATH	252
+#define	MSG_CONF_REALPATH_SIZE	8
+
+#define	MSG_CONF_NOALTER	232
+#define	MSG_CONF_NOALTER_SIZE	12
+
+#define	MSG_CONF_GROUP	261
+#define	MSG_CONF_GROUP_SIZE	5
+
+#define	MSG_CONF_APP	267
+#define	MSG_CONF_APP_SIZE	12
+
+#define	MSG_CONF_CMDLINE	280
+#define	MSG_CONF_CMDLINE_SIZE	12
+
+#define	MSG_CONF_FILTER	293
+#define	MSG_CONF_FILTER_SIZE	6
+
+#define	MSG_CONF_FILTEE	300
+#define	MSG_CONF_FILTEE_SIZE	6
+
+#define	MSG_GBL_NULL	0
+#define	MSG_GBL_NULL_SIZE	0
+
+static const char __sgs_msg[307] = { 
+/*    0 */ 0x00,  0x45,  0x4c,  0x46,  0x2d,  0x44,  0x45,  0x46,  0x41,  0x55,
+/*   10 */ 0x4c,  0x54,  0x2d,  0x4c,  0x49,  0x42,  0x50,  0x41,  0x54,  0x48,
+/*   20 */ 0x00,  0x45,  0x4c,  0x46,  0x2d,  0x53,  0x45,  0x43,  0x55,  0x52,
+/*   30 */ 0x45,  0x2d,  0x4c,  0x49,  0x42,  0x50,  0x41,  0x54,  0x48,  0x00,
+/*   40 */ 0x41,  0x4f,  0x55,  0x54,  0x2d,  0x44,  0x45,  0x46,  0x41,  0x55,
+/*   50 */ 0x4c,  0x54,  0x2d,  0x4c,  0x49,  0x42,  0x50,  0x41,  0x54,  0x48,
+/*   60 */ 0x00,  0x41,  0x4f,  0x55,  0x54,  0x2d,  0x53,  0x45,  0x43,  0x55,
+/*   70 */ 0x52,  0x45,  0x2d,  0x4c,  0x49,  0x42,  0x50,  0x41,  0x54,  0x48,
+/*   80 */ 0x00,  0x44,  0x49,  0x52,  0x45,  0x43,  0x54,  0x4f,  0x52,  0x59,
+/*   90 */ 0x2d,  0x43,  0x4f,  0x4e,  0x46,  0x49,  0x47,  0x00,  0x4f,  0x42,
+/*  100 */ 0x4a,  0x45,  0x43,  0x54,  0x2d,  0x41,  0x4c,  0x54,  0x45,  0x52,
+/*  110 */ 0x4e,  0x41,  0x54,  0x49,  0x56,  0x45,  0x53,  0x00,  0x4d,  0x45,
+/*  120 */ 0x4d,  0x4f,  0x52,  0x59,  0x2d,  0x52,  0x45,  0x53,  0x45,  0x52,
+/*  130 */ 0x56,  0x41,  0x54,  0x49,  0x4f,  0x4e,  0x00,  0x45,  0x4e,  0x56,
+/*  140 */ 0x49,  0x52,  0x4f,  0x4e,  0x4d,  0x45,  0x4e,  0x54,  0x2d,  0x56,
+/*  150 */ 0x41,  0x52,  0x49,  0x41,  0x42,  0x4c,  0x45,  0x53,  0x00,  0x46,
+/*  160 */ 0x49,  0x4c,  0x54,  0x45,  0x52,  0x2d,  0x41,  0x53,  0x53,  0x4f,
+/*  170 */ 0x43,  0x49,  0x41,  0x54,  0x49,  0x4f,  0x4e,  0x53,  0x00,  0x44,
+/*  180 */ 0x49,  0x52,  0x00,  0x41,  0x4c,  0x4c,  0x2d,  0x45,  0x4e,  0x54,
+/*  190 */ 0x52,  0x49,  0x45,  0x53,  0x00,  0x4e,  0x4f,  0x4e,  0x2d,  0x45,
+/*  200 */ 0x58,  0x49,  0x53,  0x54,  0x45,  0x4e,  0x54,  0x00,  0x45,  0x58,
+/*  210 */ 0x45,  0x43,  0x00,  0x4f,  0x50,  0x54,  0x49,  0x4f,  0x4e,  0x41,
+/*  220 */ 0x4c,  0x2d,  0x41,  0x4c,  0x54,  0x45,  0x52,  0x4e,  0x41,  0x54,
+/*  230 */ 0x45,  0x00,  0x4e,  0x4f,  0x2d,  0x41,  0x4c,  0x54,  0x45,  0x52,
+/*  240 */ 0x4e,  0x41,  0x54,  0x45,  0x00,  0x44,  0x55,  0x4d,  0x50,  0x45,
+/*  250 */ 0x44,  0x00,  0x52,  0x45,  0x41,  0x4c,  0x50,  0x41,  0x54,  0x48,
+/*  260 */ 0x00,  0x47,  0x52,  0x4f,  0x55,  0x50,  0x00,  0x53,  0x50,  0x45,
+/*  270 */ 0x43,  0x49,  0x46,  0x49,  0x43,  0x2d,  0x41,  0x50,  0x50,  0x00,
+/*  280 */ 0x43,  0x4f,  0x4d,  0x4d,  0x41,  0x4e,  0x44,  0x2d,  0x4c,  0x49,
+/*  290 */ 0x4e,  0x45,  0x00,  0x46,  0x49,  0x4c,  0x54,  0x45,  0x52,  0x00,
+/*  300 */ 0x46,  0x49,  0x4c,  0x54,  0x45,  0x45,  0x00 };
+
+#else	/* __lint */
+
+
+typedef char *	Msg;
+
+extern	const char *	_sgs_msg(Msg);
+
+#define MSG_ORIG(x)	x
+#define MSG_INTL(x)	x
+
+#define	MSG_CONF_EDLIBPATH	"ELF-DEFAULT-LIBPATH"
+#define	MSG_CONF_EDLIBPATH_SIZE	19
+
+#define	MSG_CONF_ESLIBPATH	"ELF-SECURE-LIBPATH"
+#define	MSG_CONF_ESLIBPATH_SIZE	18
+
+#define	MSG_CONF_ADLIBPATH	"AOUT-DEFAULT-LIBPATH"
+#define	MSG_CONF_ADLIBPATH_SIZE	20
+
+#define	MSG_CONF_ASLIBPATH	"AOUT-SECURE-LIBPATH"
+#define	MSG_CONF_ASLIBPATH_SIZE	19
+
+#define	MSG_CONF_DIRCFG	"DIRECTORY-CONFIG"
+#define	MSG_CONF_DIRCFG_SIZE	16
+
+#define	MSG_CONF_OBJALT	"OBJECT-ALTERNATIVES"
+#define	MSG_CONF_OBJALT_SIZE	19
+
+#define	MSG_CONF_MEMRESV	"MEMORY-RESERVATION"
+#define	MSG_CONF_MEMRESV_SIZE	18
+
+#define	MSG_CONF_ENVS	"ENVIRONMENT-VARIABLES"
+#define	MSG_CONF_ENVS_SIZE	21
+
+#define	MSG_CONF_FLTR	"FILTER-ASSOCIATIONS"
+#define	MSG_CONF_FLTR_SIZE	19
+
+#define	MSG_CONF_DIRENT	"DIR"
+#define	MSG_CONF_DIRENT_SIZE	3
+
+#define	MSG_CONF_ALLENTS	"ALL-ENTRIES"
+#define	MSG_CONF_ALLENTS_SIZE	11
+
+#define	MSG_CONF_NOEXIST	"NON-EXISTENT"
+#define	MSG_CONF_NOEXIST_SIZE	12
+
+#define	MSG_CONF_EXEC	"EXEC"
+#define	MSG_CONF_EXEC_SIZE	4
+
+#define	MSG_CONF_OPTIONAL	"OPTIONAL-ALTERNATE"
+#define	MSG_CONF_OPTIONAL_SIZE	18
+
+#define	MSG_CONF_ALTER	"ALTERNATE"
+#define	MSG_CONF_ALTER_SIZE	9
+
+#define	MSG_CONF_DUMP	"DUMPED"
+#define	MSG_CONF_DUMP_SIZE	6
+
+#define	MSG_CONF_REALPATH	"REALPATH"
+#define	MSG_CONF_REALPATH_SIZE	8
+
+#define	MSG_CONF_NOALTER	"NO-ALTERNATE"
+#define	MSG_CONF_NOALTER_SIZE	12
+
+#define	MSG_CONF_GROUP	"GROUP"
+#define	MSG_CONF_GROUP_SIZE	5
+
+#define	MSG_CONF_APP	"SPECIFIC-APP"
+#define	MSG_CONF_APP_SIZE	12
+
+#define	MSG_CONF_CMDLINE	"COMMAND-LINE"
+#define	MSG_CONF_CMDLINE_SIZE	12
+
+#define	MSG_CONF_FILTER	"FILTER"
+#define	MSG_CONF_FILTER_SIZE	6
+
+#define	MSG_CONF_FILTEE	"FILTEE"
+#define	MSG_CONF_FILTEE_SIZE	6
+
+#define	MSG_GBL_NULL	""
+#define	MSG_GBL_NULL_SIZE	0
+
+#endif	/* __lint */
+
+#endif

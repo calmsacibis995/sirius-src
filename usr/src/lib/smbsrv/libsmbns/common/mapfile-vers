@@ -1,0 +1,58 @@
+#
+# CDDL HEADER START
+#
+# The contents of this file are subject to the terms of the
+# Common Development and Distribution License (the "License").
+# You may not use this file except in compliance with the License.
+#
+# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+# or http://www.opensolaris.org/os/licensing.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+#
+# When distributing Covered Code, include this CDDL HEADER in each
+# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+# If applicable, add the following below this CDDL HEADER, with the
+# fields enclosed by brackets "[]" replaced with your own identifying
+# information: Portions Copyright [yyyy] [name of copyright owner]
+#
+# CDDL HEADER END
+#
+#
+# Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
+# Use is subject to license terms.
+#
+# ident	"%Z%%M%	%I%	%E% SMI"
+#
+
+SUNWprivate {
+    global:
+	dns_msgid_init;
+	dyndns_clear_rev_zone;
+	dyndns_update;
+	dyndns_update_core;
+	smb_adjoin_report_err;
+	smb_ads_add_share;
+	smb_ads_build_unc_name;
+	smb_ads_close;
+	smb_ads_domain_change_cleanup;
+	smb_ads_init;
+	smb_ads_join;
+	smb_ads_lookup_share;
+	smb_ads_open;
+	smb_ads_publish_share;
+	smb_ads_refresh;
+	smb_ads_remove_share;
+	smb_ads_update_attrs;
+	smb_browser_netlogon;
+	smb_browser_reconfig;
+	smb_ccache_init;
+	smb_ccache_remove;
+	smb_kinit;
+	smb_msdcs_lookup_ads;
+	smb_netbios_name_reconfig;
+	smb_netbios_start;
+	smb_netbios_shutdown;
+    local:
+	*;
+};

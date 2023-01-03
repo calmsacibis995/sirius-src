@@ -1,0 +1,68 @@
+#!/sbin/sh
+#
+# CDDL HEADER START
+#
+# The contents of this file are subject to the terms of the
+# Common Development and Distribution License (the "License").
+# You may not use this file except in compliance with the License.
+#
+# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+# or http://www.opensolaris.org/os/licensing.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+#
+# When distributing Covered Code, include this CDDL HEADER in each
+# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+# If applicable, add the following below this CDDL HEADER, with the
+# fields enclosed by brackets "[]" replaced with your own identifying
+# information: Portions Copyright [yyyy] [name of copyright owner]
+#
+# CDDL HEADER END
+#
+#
+# Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
+# Use is subject to license terms.
+#
+#ident	"%Z%%M%	%I%	%E% SMI"
+
+. /lib/svc/share/smf_include.sh
+
+#
+# In a shared-IP zone we need this service to be up, but all of the work
+# it tries to do is irrelevant (and will actually lead to the service 
+# failing if we try to do it), so just bail out. 
+# In the global zone and exclusive-IP zones we proceed.
+#
+smf_configure_ip || exit $SMF_EXIT_OK
+
+#
+# Cause ifconfig to not automatically start in.mpathd when IPMP groups are
+# configured.  This is not strictly necessary but makes it so that in.mpathd
+# will always be started explicitly from /lib/svc/method/net-init (the 
+# svc:/network/initial service), when we're sure that /usr is mounted.
+#
+SUNW_NO_MPATHD=; export SUNW_NO_MPATHD
+
+#
+# Before any interfaces are configured, we need to set the system
+# default IP forwarding behavior.  This will be the setting for
+# interfaces that don't modify the per-interface setting with the
+# router or -router ifconfig command in their /etc/hostname.<intf>
+# files.  Due to their dependency on this service, the IP forwarding services
+# will run at this point (though routing daemons will not run until later
+# in the boot process) and set forwarding flags.
+#
+
+# IPv4 loopback
+/sbin/ifconfig lo0 plumb 127.0.0.1 up
+
+# IPv6 loopback
+/sbin/ifconfig lo0 inet6 plumb ::1 up
+
+# Trusted Extensions shares the loopback interface with all zones
+if (smf_is_system_labeled); then
+	if smf_is_globalzone; then
+		 /sbin/ifconfig lo0 all-zones
+		 /sbin/ifconfig lo0 inet6 all-zones
+	fi
+fi

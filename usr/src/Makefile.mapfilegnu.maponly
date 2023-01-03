@@ -1,0 +1,7 @@
+# Makefile stub used for helper in building mapfiles from asm
+# This is used when building libs that consist ONLY of a mapfile
+# ... It only modifies the BUILD.SO to include $PICS again
+
+include $(SRC)/Makefile.mapfilegnu
+
+BUILD.SO=	$(LD) -o $@ $(PICS) -G $(DYNFLAGS)

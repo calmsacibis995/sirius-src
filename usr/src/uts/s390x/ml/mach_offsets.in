@@ -1,0 +1,155 @@
+\
+\ CDDL HEADER START
+\
+\ The contents of this file are subject to the terms of the
+\ Common Development and Distribution License, Version 1.0 only
+\ (the "License").  You may not use this file except in compliance
+\ with the License.
+\
+\ You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+\ or http://www.opensolaris.org/os/licensing.
+\ See the License for the specific language governing permissions
+\ and limitations under the License.
+\
+\ When distributing Covered Code, include this CDDL HEADER in each
+\ file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+\ If applicable, add the following below this CDDL HEADER, with the
+\ fields enclosed by brackets "[]" replaced with your own identifying
+\ information: Portions Copyright [yyyy] [name of copyright owner]
+\
+\ CDDL HEADER END
+\
+\ Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
+\ Use is subject to license terms.
+\
+\ offsets.in: input file to produce assym.h using the stabs program
+\
+\
+\ Guidelines:
+\ 
+\ A blank line is required between structure/union/intrinsic names.
+\ 
+\ The general form is:
+\ 
+\	name size_define [shift_define]
+\		[member_name [offset_define]]
+\	{blank line}
+\ 
+\ If no individual member_name's are specified then all members are processed.
+\ If offset_define is not specified then the member_name is
+\ converted to all caps and used instead.  If the size of an item is
+\ a power of two then an optional shift count may be output using
+\ shift_define as the name but only if shift_define was specified.
+\ 
+\ Arrays cause stabs to automatically output the per-array-item increment
+\ in addition to the base address:
+\ 
+\	 foo FOO_SIZE
+\		array	FOO_ARRAY
+\ 
+\ results in:
+\ 
+\	#define	FOO_ARRAY	0x0
+\	#define	FOO_ARRAY_INCR	0x4
+\ 
+\ which allows \#define's to be used to specify array items:
+\ 
+\	#define	FOO_0	(FOO_ARRAY + (0 * FOO_ARRAY_INCR))
+\	#define	FOO_1	(FOO_ARRAY + (1 * FOO_ARRAY_INCR))
+\	...
+\	#define	FOO_n	(FOO_ARRAY + (n * FOO_ARRAY_INCR))
+\ 
+\ There are several examples below (search for _INCR).
+\ 
+\ There is currently no manner in which to identify "anonymous"
+\ structures or unions so if they are to be used in assembly code
+\ they must be given names.
+\ 
+\ When specifying the offsets of nested structures/unions each nested
+\ structure or union must be listed separately then use the
+\ "\#define" escapes to add the offsets from the base structure/union
+\ and all of the nested structures/unions together.  See the many
+\ examples already in this file.
+
+#pragma ident	"@(#)mach_offsets.in	1.3	05/08/11 SMI"
+
+#ifndef	_GENASSYM
+#define	_GENASSYM
+#endif
+
+#include <sys/types.h>
+#include <sys/machparam.h>
+#include <sys/intr.h>
+#include <sys/intreg.h>
+#include <sys/cpuvar.h>
+#include <sys/vmmeter.h>
+#include <sys/mutex_impl.h>
+#include <sys/lockstat.h>
+#include <sys/ddi_isa.h>
+#include <sys/ddi_impldefs.h>
+#include <vm/hat_pte.h>
+#include <vm/htable.h>
+#include <vm/hat_s390x.h>
+#include <sys/avintr.h>
+#include <sys/strsubr.h>
+#include <sys/ontrap.h>
+#include <sys/lgrp.h>
+#include <sys/ddifm_impl.h>
+#include <sys/regset.h>
+
+hat	HAT_SIZE
+	hat_mutex
+	hat_cpus
+	hat_as
+	hat_stats
+	hat_pages_mapped
+	hat_flags
+	hat_htable	
+	hat_next
+	hat_prev
+	hat_num_hash	
+	hat_ht_hash	
+	hat_ht_cached	
+
+kpm_page	KPMPAGE_SIZE KPMPAGE_SHIFT
+	kp_refcnt	KPMPAGE_REFCNT
+	kp_refcnta	KPMPAGE_REFCNTA
+	kp_refcntc	KPMPAGE_REFCNTC
+	kp_refcnts	KPMPAGE_REFCNTS
+
+kpm_hlk		KPMHLK_SIZE KPMHLK_SHIFT
+	khl_mutex	KPMHLK_MUTEX
+	khl_lock	KPMHLK_LOCK
+
+kpm_spage	KPMSPAGE_SIZE KPMSPAGE_SHIFT
+	kp_mapped	KPMSPAGE_MAPPED
+
+kpm_shlk	KPMSHLK_SIZE KPMSHLK_SHIFT
+	kshl_lock	KPMSHLK_LOCK
+
+memseg		MEMSEG_SIZE
+	pages		MEMSEG_PAGES
+	epages		MEMSEG_EPAGES
+	pages_base	MEMSEG_PAGES_BASE
+	pages_end	MEMSEG_PAGES_END
+\	next		MEMSEG_NEXT
+
+page		PAGE_SIZE
+	p_pagenum	PAGE_PAGENUM
+
+s390xstk	STK_S390X_SZ
+	st_bc
+	st_eos
+	st_regs
+	st_args
+
+s390xstk32	STK32_S390X_SZ
+	st32_bc
+	st32_eos
+	st32_regs
+	st32_args
+
+machpcb_t	MACHPCB_SZ
+	mpcb_ctx
+
+mcontext_t	MCONTEXT_SZ

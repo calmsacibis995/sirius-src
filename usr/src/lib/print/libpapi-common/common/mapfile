@@ -1,0 +1,155 @@
+#
+# CDDL HEADER START
+#
+# The contents of this file are subject to the terms of the
+# Common Development and Distribution License (the "License").
+# You may not use this file except in compliance with the License.
+#
+# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+# or http://www.opensolaris.org/os/licensing.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+#
+# When distributing Covered Code, include this CDDL HEADER in each
+# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+# If applicable, add the following below this CDDL HEADER, with the
+# fields enclosed by brackets "[]" replaced with your own identifying
+# information: Portions Copyright [yyyy] [name of copyright owner]
+#
+# CDDL HEADER END
+#
+
+#
+# Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
+# Use is subject to license terms.
+#
+
+#
+# $Id: mapfile.in,v 1.2 2006/03/02 06:31:36 njacobs Exp $
+#
+
+# ident	"%Z%%M%	%I%	%E% SMI"
+
+#
+# Common interfaces that are most likely to be shared amongst the various
+# PAPI implementations.
+#
+
+SUNW_1.0 {
+    global:
+	# PAPI Attribute Calls
+        papiAttributeListAddValue;
+        papiAttributeListAddBoolean;
+        papiAttributeListAddCollection;
+        papiAttributeListAddDatetime;
+        papiAttributeListAddInteger;
+        papiAttributeListAddMetadata;
+        papiAttributeListAddRange;
+        papiAttributeListAddResolution;
+        papiAttributeListAddString;
+        papiAttributeListDelete;
+        papiAttributeListGetValue;
+        papiAttributeListGetNext;
+        papiAttributeListFind;
+        papiAttributeListGetBoolean;
+        papiAttributeListGetCollection;
+        papiAttributeListGetDatetime;
+        papiAttributeListGetInteger;
+        papiAttributeListGetMetadata;
+        papiAttributeListGetRange;
+        papiAttributeListGetResolution;
+        papiAttributeListGetString;
+        papiAttributeListFromString;
+        papiAttributeListToString;
+        papiAttributeListFree;
+
+	# PAPI Service Calls
+        papiServiceCreate =		NODYNSORT;
+        papiServiceDestroy =		NODYNSORT;
+        papiServiceSetUserName =	NODYNSORT;
+        papiServiceSetPassword =	NODYNSORT;
+        papiServiceSetEncryption =	NODYNSORT;
+        papiServiceSetAuthCB =		NODYNSORT;
+        papiServiceSetAppData =		NODYNSORT;
+        papiServiceGetUserName =	NODYNSORT;
+        papiServiceGetPassword =	NODYNSORT;
+        papiServiceGetEncryption;
+        papiServiceGetAppData =		NODYNSORT;
+        papiServiceGetServiceName =	NODYNSORT;
+        papiServiceGetAttributeList =	NODYNSORT;
+        papiServiceGetStatusMessage =	NODYNSORT;
+
+	# PAPI Printer Calls
+        papiPrintersList =		NODYNSORT;
+        papiPrinterQuery =		NODYNSORT;
+        papiPrinterAdd =		NODYNSORT;
+        papiPrinterModify =		NODYNSORT;
+        papiPrinterRemove =		NODYNSORT;
+        papiPrinterDisable =		NODYNSORT;
+        papiPrinterEnable =		NODYNSORT;
+        papiPrinterPause =		NODYNSORT;
+        papiPrinterResume =		NODYNSORT;
+        papiPrinterPurgeJobs =		NODYNSORT;
+        papiPrinterListJobs =		NODYNSORT;
+        papiPrinterGetAttributeList =	NODYNSORT;
+        papiPrinterFree =		NODYNSORT;
+        papiPrinterListFree =		NODYNSORT;
+
+	# PAPI Job Calls
+        papiJobSubmit =			NODYNSORT;
+        papiJobSubmitByReference =	NODYNSORT;
+        papiJobValidate =		NODYNSORT;
+        papiJobStreamOpen =		NODYNSORT;
+        papiJobStreamWrite =		NODYNSORT;
+        papiJobStreamClose =		NODYNSORT;
+        papiJobQuery =			NODYNSORT;
+        papiJobModify =			NODYNSORT;
+        papiJobMove =			NODYNSORT;
+        papiJobCancel =			NODYNSORT;
+        papiJobHold =			NODYNSORT;
+        papiJobRelease =		NODYNSORT;
+        papiJobRestart =		NODYNSORT;
+        papiJobPromote =		NODYNSORT;
+        papiJobGetAttributeList =	NODYNSORT;
+        papiJobGetPrinterName =		NODYNSORT;
+        papiJobGetId;
+        papiJobGetJobTicket =		NODYNSORT;
+        papiJobFree =			NODYNSORT;
+        papiJobListFree =		NODYNSORT;
+
+	# Misc. PAPI Calls
+        papiStatusString;
+        papiLibrarySupportedCall;
+        papiLibrarySupportedCalls;
+};
+
+SUNWprivate_1.0 { # Misc. semi-private supporting calls
+    global:
+        papiServiceSetPeer =		NODYNSORT;
+        papiJobCreate =			NODYNSORT;
+        papiJobStreamAdd =		NODYNSORT;
+        papiJobCommit =			NODYNSORT;
+
+	#     URI
+        uri_from_string;
+        uri_to_string;
+        uri_free;
+
+	#    list
+        list_remove;
+        list_append;
+        list_concatenate;
+
+	#	NS
+	getprinterbyname =		NODYNSORT;
+
+	#    extra Attribute Calls
+        copy_attributes;
+        split_and_copy_attributes;
+	papiAttributeListPrint;
+
+	is_localhost;
+
+    local:
+        *;
+};

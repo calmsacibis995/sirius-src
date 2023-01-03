@@ -1,0 +1,14 @@
+#
+# ident	"%Z%%M%	%I%	%E% SMI"
+#
+default=0
+timeout=60
+title Solaris Express
+	kernel /boot/platform/i86pc/kernel/unix -B install_media=cdrom
+	module /boot/x86.miniroot
+title Solaris Express Serial Console ttya
+        kernel /boot/platform/i86pc/kernel/unix -B install_media=cdrom,console=ttya
+        module /boot/x86.miniroot
+title Solaris Express Serial Console ttyb (for lx50, v60x and v65x)
+        kernel /boot/platform/i86pc/kernel/unix -B install_media=cdrom,console=ttyb
+        module /boot/x86.miniroot

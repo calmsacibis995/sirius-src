@@ -1,0 +1,298 @@
+#
+# CDDL HEADER START
+#
+# The contents of this file are subject to the terms of the
+# Common Development and Distribution License (the "License").
+# You may not use this file except in compliance with the License.
+#
+# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+# or http://www.opensolaris.org/os/licensing.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+#
+# When distributing Covered Code, include this CDDL HEADER in each
+# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+# If applicable, add the following below this CDDL HEADER, with the
+# fields enclosed by brackets "[]" replaced with your own identifying
+# information: Portions Copyright [yyyy] [name of copyright owner]
+#
+# CDDL HEADER END
+#
+# Copyright 2008 Sine Nomine Associates. All rights reserved.
+# Use is subject to license terms.
+#
+
+#
+# uts/s390x/Makefile.s390x
+#
+# Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
+# Use is subject to license terms.
+#
+#	This makefile contains the common definitions for the i86pc unix
+#	and all i86pc implementation architecture dependent modules.
+#
+
+#
+#	Machine type (implementation architecture):
+#
+PLATFORM	 = s390x
+
+#
+#	uname -m value
+#
+UNAME_M		= $(PLATFORM)
+
+#
+#	Everybody needs to know how to build modstubs.o and to locate unix.o
+#
+UNIX_DIR	 = $(UTSBASE)/$(PLATFORM)/unix
+GENLIB_DIR	 = $(UTSBASE)/$(PLATFORM)/genunix
+
+MODSTUBS_DIR	 = $(UNIX_DIR)
+DSF_DIR		 = $(UTSBASE)/$(PLATFORM)/genassym
+LINTS_DIR	 = $(OBJS_DIR)
+LINT_LIB_DIR	 = $(UTSBASE)/$(PLATFORM)/lint-libs/$(OBJS_DIR)
+
+DTRACESTUBS_O	 = $(OBJS_DIR)/dtracestubs.o
+DTRACESTUBS	 = $(OBJS_DIR)/libdtracestubs.so
+
+SYM_MOD		= $(OBJS_DIR)/unix.sym
+
+UNIX_O		 = $(UNIX_DIR)/$(OBJS_DIR)/unix.o
+MODSTUBS_O	 = $(MODSTUBS_DIR)/$(OBJS_DIR)/modstubs.o
+GENLIB	 	 = $(GENLIB_DIR)/$(OBJS_DIR)/libgenunix.so
+LINT_LIB	 = $(LINT_LIB_DIR)/llib-lunix.ln
+GEN_LINT_LIB	 = $(LINT_LIB_DIR)/llib-lgenunix.ln
+
+#
+#	Include the makefiles which define build rule templates, the
+#	collection of files per module, and a few specific flags. Note
+#	that order is significant, just as with an include path. The
+#	first build rule template which matches the files name will be
+#	used. By including these in order from most machine dependent
+#	to most machine independent, we allow a machine dependent file
+#	to be used in preference over a machine independent version
+#	(Such as a machine specific optimization, which preserves the
+#	interfaces.)
+#
+include $(UTSTREE)/$(PLATFORM)/Makefile.files
+include $(UTSTREE)/zSeries/Makefile.files
+include $(UTSTREE)/common/Makefile.files
+
+#
+#	Include machine independent rules. Note that this does not imply
+#	that the resulting module from rules in Makefile.uts is	machine
+#	independent. Only that the build rules are machine independent.
+#
+include $(UTSBASE)/Makefile.uts
+
+#
+#	Define supported builds
+#
+DEF_BUILDS		= $(DEF_BUILDS64) 
+ALL_BUILDS		= $(ALL_BUILDS64)
+
+#
+#	s390x inlines
+#
+INLINES			+= $(UTSBASE)/zSeries/ml/s390x.il
+
+#
+#	kernel-specific optimizations; override default in Makefile.master
+#
+
+CFLAGS_XARCH		= $(s390x_CFLAGS)
+
+COPTIMIZE		= $(COPTFLAG64)
+
+CFLAGS			= $(CFLAGS_XARCH)
+CFLAGS			+= $(COPTIMIZE) -xO2
+CFLAGS			+= $(INLINES) -D_ASM_INLINES
+CFLAGS			+= $(CCMODE)
+CFLAGS			+= $(SPACEFLAG)
+CFLAGS			+= $(CCUNBOUND)
+CFLAGS			+= $(CFLAGS_uts)
+
+ASFLAGS_XARCH		= $(s390x_ASFLAGS)
+
+ASFLAGS			+= $(ASFLAGS_XARCH)
+
+AS_INC_PATH		+= -I$(DSF_DIR)/$(OBJS_DIR)
+
+LINT_KMODS	+= $(GENUNIX_KMODS)
+
+LINT_DEFS	= 
+
+#
+#	The following must be defined for all implementations:
+#
+#	MAPFILE:		ld mapfile for the build of kernel/unix.
+#	MODSTUBS:		Module stubs source file.
+#	GENCONST_SRC:		genconst.c
+#	OFFSETS:		offsets.in
+#	PLATFORM_OFFSETS:	Platform specific mach_offsets.in
+#	FDOFFSETS:		fd_offsets.in
+#
+MAPFILE		 = $(UTSBASE)/s390x/conf/Mapfile
+MODSTUBS	 = $(UTSBASE)/zSeries/ml/modstubs.s
+GENCONST_SRC	 = $(UTSBASE)/s390x/ml/genconst.c
+OFFSETS		 = $(UTSBASE)/s390x/ml/offsets.in
+PLATFORM_OFFSETS = $(UTSBASE)/s390x/ml/mach_offsets.in
+FDOFFSETS 	 = $(UTSBASE)/s390x/io/fd_offsets.in
+
+#
+#	Define the actual specific platforms - obviously none.
+#
+MACHINE_DEFS	 = -D$(PLATFORM) -D_MACHDEP
+
+#
+#	Software workarounds for hardware "features"
+#
+
+include	$(UTSBASE)/$(PLATFORM)/Makefile.workarounds
+
+#
+# Simulator flag
+#
+i386_SIMULATOR		= -D_SIMULATOR_SUPPORT
+amd64_SIMULATOR		= -D_SIMULATOR_SUPPORT
+
+SIMULATOR		= $($(MACH)_SIMULATOR)
+
+#
+#	Debugging level
+#
+#	Special knowledge of which special debugging options effect which
+#	file is used to optimize the build if these flags are changed.
+#
+#	XXX: The above could possibly be done for more flags and files, but
+#	     is left as an experiment to the interested reader. Be forewarned,
+#	     that excessive use could lead to maintenance difficulties.
+#
+DEBUG_DEFS_OBJ32	=
+DEBUG_DEFS_DBG32	= -DDEBUG
+DEBUG_DEFS_DBG32	+= $(SIMULATOR)
+DEBUG_DEFS_OBJ64	=
+DEBUG_DEFS_DBG64	= -DDEBUG
+DEBUG_DEFS_DBG64	+= $(SIMULATOR)
+DEBUG_DEFS		= $(DEBUG_DEFS_$(BUILD_TYPE))
+
+DEBUG_COND_OBJ32	:sh = echo \\043
+DEBUG_COND_DBG32	=
+DEBUG_COND_OBJ64	:sh = echo \\043
+DEBUG_COND_DBG64	=
+IF_DEBUG_OBJ		= $(DEBUG_COND_$(BUILD_TYPE))$(OBJS_DIR)/
+
+$(IF_DEBUG_OBJ)trap.o		:= DEBUG_DEFS += -DTRAPDEBUG -DTRAPTRACE
+$(IF_DEBUG_OBJ)syscall_asm.o	:= DEBUG_DEFS += -DSYSCALLTRACE -DTRAPTRACE
+$(IF_DEBUG_OBJ)fast_trap_asm.o	:= DEBUG_DEFS += -DTRAPTRACE
+$(IF_DEBUG_OBJ)interrupt.o	:= DEBUG_DEFS += -DTRAPTRACE
+$(IF_DEBUG_OBJ)locore.o		:= DEBUG_DEFS += -DTRAPTRACE
+$(IF_DEBUG_OBJ)mp_startup.o	:= DEBUG_DEFS += -DTRAPTRACE
+$(IF_DEBUG_OBJ)machdep.o	:= DEBUG_DEFS += -DTRAPTRACE
+$(IF_DEBUG_OBJ)exception.o	:= DEBUG_DEFS += -DTRAPTRACE
+
+#
+#	Build `options'. These are historical and the need for these
+#	was removed by the module technology.
+#
+OPTION_DEFS	 = -DC2_AUDIT
+
+#
+#	Collect the preprocessor definitions to be associated with *all*
+#	files.
+#
+ALL_DEFS	 = $(MACHINE_DEFS) $(WORKAROUND_DEFS) $(DEBUG_DEFS) \
+		   $(OPTION_DEFS)
+GENASSYM_DEFS	 = $(MACHINE_DEFS) $(OPTION_DEFS) \
+			-_gcc=-fno-eliminate-unused-debug-symbols \
+			-_gcc=-fno-eliminate-unused-debug-types
+
+#
+# ----- TRANSITIONAL SECTION --------------------------------------------------
+#
+
+#
+#	Not everything which *should* be a module is a module yet. The
+#	following is a list of such objects which are currently part of
+#	the base kernel but should soon become kmods.
+#
+#	XXX: $(KMACCT_OBJS) is neither in the MT kernel nor was it ever
+#	     made into a module. If it is made MT safe before being made
+#	     into a module, it should be added to this list. It was in
+#	     this list pre ON-4.0.
+#
+#
+MACH_NOT_YET_KMODS	= $(AUTOCONF_OBJS)
+
+#
+# ----- END OF TRANSITIONAL SECTION -------------------------------------------
+#
+
+#
+#	The kernels modules which are "implementation architecture"
+#	specific for this machine are enumerated below. Note that most
+#	of these modules must exist (in one form or another) for each
+#	architecture.
+#
+#	Machine Specific Driver Modules (/kernel/drv)
+#	DRV_KMODS are built both 32-bit and 64-bit
+#	DRV_KMODS_32 are built only 32-bit
+#	DRV_KMODS_64 are built only 64-bit
+#
+#	XXX: How many of these are really machine specific?
+#
+
+DRV_KMODS	+= rootnex
+DRV_KMODS	+= ccwnex
+DRV_KMODS	+= cpunex
+
+#
+#	CPU Modules
+#
+CPU_KMODS	+= 
+
+#
+#	Exec Class Modules (/kernel/exec):
+#
+EXEC_KMODS	+=
+
+#
+#	Scheduling Class Modules (/kernel/sched):
+#
+SCHED_KMODS	+=
+
+#
+#	File System Modules (/kernel/fs):
+#
+FS_KMODS	+=
+
+#
+#	Streams Modules (/kernel/strmod):
+#
+STRMOD_KMODS	+=
+
+#
+#	'System' Modules (/kernel/sys):
+#
+SYS_KMODS	+=
+
+#
+#	'Misc' Modules (/kernel/misc):
+#
+MISC_KMODS	+= 
+
+#
+#	'Mach' Modules (/kernel/mach):
+#
+MACH_KMODS     	+= 
+
+#
+#	Modules excluded from the product:
+#
+$(CLOSED_BUILD)CLOSED_XMODS	+= spwr
+
+#
+#	generic-unix module (/kernel/genunix):
+#
+GENUNIX_KMODS	+= genunix

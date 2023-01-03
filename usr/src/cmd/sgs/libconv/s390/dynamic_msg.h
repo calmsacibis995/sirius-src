@@ -1,0 +1,862 @@
+#ifndef	_DYNAMIC_MSG_DOT_H
+#define	_DYNAMIC_MSG_DOT_H
+
+#ifndef	__lint
+
+typedef int	Msg;
+
+#define	MSG_ORIG(x)	&__sgs_msg[x]
+
+extern	const char *	_sgs_msg(Msg);
+
+#define	MSG_INTL(x)	_sgs_msg(x)
+
+
+#define	MSG_DYN_NULL	1
+#define	MSG_DYN_NULL_SIZE	4
+
+#define	MSG_DYN_NEEDED	6
+#define	MSG_DYN_NEEDED_SIZE	6
+
+#define	MSG_DYN_PLTRELSZ	13
+#define	MSG_DYN_PLTRELSZ_SIZE	8
+
+#define	MSG_DYN_PLTRELSZ_ALT	22
+#define	MSG_DYN_PLTRELSZ_ALT_SIZE	5
+
+#define	MSG_DYN_PLTGOT	28
+#define	MSG_DYN_PLTGOT_SIZE	6
+
+#define	MSG_DYN_HASH	35
+#define	MSG_DYN_HASH_SIZE	4
+
+#define	MSG_DYN_STRTAB	40
+#define	MSG_DYN_STRTAB_SIZE	6
+
+#define	MSG_DYN_SYMTAB	52
+#define	MSG_DYN_SYMTAB_SIZE	6
+
+#define	MSG_DYN_RELA	59
+#define	MSG_DYN_RELA_SIZE	4
+
+#define	MSG_DYN_RELASZ	64
+#define	MSG_DYN_RELASZ_SIZE	6
+
+#define	MSG_DYN_RELAENT	71
+#define	MSG_DYN_RELAENT_SIZE	7
+
+#define	MSG_DYN_STRSZ	79
+#define	MSG_DYN_STRSZ_SIZE	5
+
+#define	MSG_DYN_SYMENT	85
+#define	MSG_DYN_SYMENT_SIZE	6
+
+#define	MSG_DYN_INIT	95
+#define	MSG_DYN_INIT_SIZE	4
+
+#define	MSG_DYN_FINI	100
+#define	MSG_DYN_FINI_SIZE	4
+
+#define	MSG_DYN_SONAME	105
+#define	MSG_DYN_SONAME_SIZE	6
+
+#define	MSG_DYN_RPATH	112
+#define	MSG_DYN_RPATH_SIZE	5
+
+#define	MSG_DYN_SYMBOLIC	118
+#define	MSG_DYN_SYMBOLIC_SIZE	8
+
+#define	MSG_DYN_SYMBOLIC_ALT	127
+#define	MSG_DYN_SYMBOLIC_ALT_SIZE	4
+
+#define	MSG_DYN_REL	135
+#define	MSG_DYN_REL_SIZE	3
+
+#define	MSG_DYN_RELSZ	16
+#define	MSG_DYN_RELSZ_SIZE	5
+
+#define	MSG_DYN_RELENT	139
+#define	MSG_DYN_RELENT_SIZE	6
+
+#define	MSG_DYN_PLTPAD	146
+#define	MSG_DYN_PLTPAD_SIZE	6
+
+#define	MSG_DYN_PLTPADSZ	153
+#define	MSG_DYN_PLTPADSZ_SIZE	8
+
+#define	MSG_DYN_PLTREL	162
+#define	MSG_DYN_PLTREL_SIZE	6
+
+#define	MSG_DYN_DEBUG	169
+#define	MSG_DYN_DEBUG_SIZE	5
+
+#define	MSG_DYN_TEXTREL	175
+#define	MSG_DYN_TEXTREL_SIZE	7
+
+#define	MSG_DYN_JMPREL	132
+#define	MSG_DYN_JMPREL_SIZE	6
+
+#define	MSG_DYN_BIND_NOW	183
+#define	MSG_DYN_BIND_NOW_SIZE	8
+
+#define	MSG_DYN_INIT_ARRAY	195
+#define	MSG_DYN_INIT_ARRAY_SIZE	10
+
+#define	MSG_DYN_FINI_ARRAY	206
+#define	MSG_DYN_FINI_ARRAY_SIZE	10
+
+#define	MSG_DYN_INIT_ARRAYSZ	220
+#define	MSG_DYN_INIT_ARRAYSZ_SIZE	12
+
+#define	MSG_DYN_FINI_ARRAYSZ	233
+#define	MSG_DYN_FINI_ARRAYSZ_SIZE	12
+
+#define	MSG_DYN_RUNPATH	246
+#define	MSG_DYN_RUNPATH_SIZE	7
+
+#define	MSG_DYN_FLAGS	254
+#define	MSG_DYN_FLAGS_SIZE	5
+
+#define	MSG_DYN_PREINIT_ARRAY	192
+#define	MSG_DYN_PREINIT_ARRAY_SIZE	13
+
+#define	MSG_DYN_PREINIT_ARRAYSZ	217
+#define	MSG_DYN_PREINIT_ARRAYSZ_SIZE	15
+
+#define	MSG_DYN_RELACOUNT	260
+#define	MSG_DYN_RELACOUNT_SIZE	9
+
+#define	MSG_DYN_RELCOUNT	270
+#define	MSG_DYN_RELCOUNT_SIZE	8
+
+#define	MSG_DYN_FLAGS_1	279
+#define	MSG_DYN_FLAGS_1_SIZE	7
+
+#define	MSG_DYN_USED	287
+#define	MSG_DYN_USED_SIZE	4
+
+#define	MSG_DYN_FILTER	297
+#define	MSG_DYN_FILTER_SIZE	6
+
+#define	MSG_DYN_AUXILIARY	309
+#define	MSG_DYN_AUXILIARY_SIZE	9
+
+#define	MSG_DYN_CACHE	319
+#define	MSG_DYN_CACHE_SIZE	5
+
+#define	MSG_DYN_VERSYM	325
+#define	MSG_DYN_VERSYM_SIZE	6
+
+#define	MSG_DYN_VERDEF	332
+#define	MSG_DYN_VERDEF_SIZE	6
+
+#define	MSG_DYN_VERDEFNUM	339
+#define	MSG_DYN_VERDEFNUM_SIZE	9
+
+#define	MSG_DYN_VERNEED	349
+#define	MSG_DYN_VERNEED_SIZE	7
+
+#define	MSG_DYN_VERNEEDNUM	357
+#define	MSG_DYN_VERNEEDNUM_SIZE	10
+
+#define	MSG_DYN_SYMINFO	368
+#define	MSG_DYN_SYMINFO_SIZE	7
+
+#define	MSG_DYN_SYMINSZ	376
+#define	MSG_DYN_SYMINSZ_SIZE	7
+
+#define	MSG_DYN_SYMINENT	384
+#define	MSG_DYN_SYMINENT_SIZE	8
+
+#define	MSG_DYN_POSFLAG_1	393
+#define	MSG_DYN_POSFLAG_1_SIZE	9
+
+#define	MSG_DYN_FEATURE_1	403
+#define	MSG_DYN_FEATURE_1_SIZE	9
+
+#define	MSG_DYN_MOVESZ	413
+#define	MSG_DYN_MOVESZ_SIZE	6
+
+#define	MSG_DYN_MOVEENT	420
+#define	MSG_DYN_MOVEENT_SIZE	7
+
+#define	MSG_DYN_MOVETAB	428
+#define	MSG_DYN_MOVETAB_SIZE	7
+
+#define	MSG_DYN_REGISTER	436
+#define	MSG_DYN_REGISTER_SIZE	8
+
+#define	MSG_DYN_CHECKSUM	445
+#define	MSG_DYN_CHECKSUM_SIZE	8
+
+#define	MSG_DYN_PLTRESERVE	454
+#define	MSG_DYN_PLTRESERVE_SIZE	11
+
+#define	MSG_DYN_DEPAUDIT	466
+#define	MSG_DYN_DEPAUDIT_SIZE	8
+
+#define	MSG_DYN_AUDIT	469
+#define	MSG_DYN_AUDIT_SIZE	5
+
+#define	MSG_DYN_CONFIG	475
+#define	MSG_DYN_CONFIG_SIZE	6
+
+#define	MSG_DYN_SUNW_AUXILIARY	304
+#define	MSG_DYN_SUNW_AUXILIARY_SIZE	14
+
+#define	MSG_DYN_SUNW_RTLDINF	482
+#define	MSG_DYN_SUNW_RTLDINF_SIZE	12
+
+#define	MSG_DYN_SUNW_FILTER	292
+#define	MSG_DYN_SUNW_FILTER_SIZE	11
+
+#define	MSG_DYN_SUNW_CAP	495
+#define	MSG_DYN_SUNW_CAP_SIZE	8
+
+#define	MSG_DYN_SUNW_SYMTAB	47
+#define	MSG_DYN_SUNW_SYMTAB_SIZE	11
+
+#define	MSG_DYN_SUNW_SYMSZ	504
+#define	MSG_DYN_SUNW_SYMSZ_SIZE	10
+
+#define	MSG_DYN_SUNW_SORTENT	515
+#define	MSG_DYN_SUNW_SORTENT_SIZE	12
+
+#define	MSG_DYN_SUNW_SYMSORT	528
+#define	MSG_DYN_SUNW_SYMSORT_SIZE	12
+
+#define	MSG_DYN_SUNW_SYMSORTSZ	541
+#define	MSG_DYN_SUNW_SYMSORTSZ_SIZE	14
+
+#define	MSG_DYN_SUNW_TLSSORT	556
+#define	MSG_DYN_SUNW_TLSSORT_SIZE	12
+
+#define	MSG_DYN_SUNW_TLSSORTSZ	569
+#define	MSG_DYN_SUNW_TLSSORTSZ_SIZE	14
+
+#define	MSG_DYN_SUNW_STRPAD	584
+#define	MSG_DYN_SUNW_STRPAD_SIZE	11
+
+#define	MSG_DYN_SUNW_LDMACH	596
+#define	MSG_DYN_SUNW_LDMACH_SIZE	11
+
+#define	MSG_DF_ORIGIN	608
+#define	MSG_DF_ORIGIN_SIZE	6
+
+#define	MSG_DF_SYMBOLIC	118
+#define	MSG_DF_SYMBOLIC_SIZE	8
+
+#define	MSG_DF_TEXTREL	175
+#define	MSG_DF_TEXTREL_SIZE	7
+
+#define	MSG_DF_BIND_NOW	183
+#define	MSG_DF_BIND_NOW_SIZE	8
+
+#define	MSG_DF_STATIC_TLS	615
+#define	MSG_DF_STATIC_TLS_SIZE	10
+
+#define	MSG_DF1_NOW	188
+#define	MSG_DF1_NOW_SIZE	3
+
+#define	MSG_DF1_GLOBAL	626
+#define	MSG_DF1_GLOBAL_SIZE	6
+
+#define	MSG_DF1_GROUP	633
+#define	MSG_DF1_GROUP_SIZE	5
+
+#define	MSG_DF1_NODELETE	639
+#define	MSG_DF1_NODELETE_SIZE	8
+
+#define	MSG_DF1_LOADFLTR	648
+#define	MSG_DF1_LOADFLTR_SIZE	8
+
+#define	MSG_DF1_INITFIRST	657
+#define	MSG_DF1_INITFIRST_SIZE	9
+
+#define	MSG_DF1_INTERPOSE	667
+#define	MSG_DF1_INTERPOSE_SIZE	16
+
+#define	MSG_DF1_NOOPEN	684
+#define	MSG_DF1_NOOPEN_SIZE	6
+
+#define	MSG_DF1_ORIGIN	608
+#define	MSG_DF1_ORIGIN_SIZE	6
+
+#define	MSG_DF1_DIRECT	693
+#define	MSG_DF1_DIRECT_SIZE	6
+
+#define	MSG_DF1_TRANS	700
+#define	MSG_DF1_TRANS_SIZE	5
+
+#define	MSG_DF1_NODEFLIB	706
+#define	MSG_DF1_NODEFLIB_SIZE	8
+
+#define	MSG_DF1_NODUMP	715
+#define	MSG_DF1_NODUMP_SIZE	6
+
+#define	MSG_DF1_CONFALT	722
+#define	MSG_DF1_CONFALT_SIZE	7
+
+#define	MSG_DF1_ENDFILTEE	730
+#define	MSG_DF1_ENDFILTEE_SIZE	9
+
+#define	MSG_DF1_DISPRELPND	740
+#define	MSG_DF1_DISPRELPND_SIZE	20
+
+#define	MSG_DF1_DISPRELDNE	761
+#define	MSG_DF1_DISPRELDNE_SIZE	20
+
+#define	MSG_DF1_NODIRECT	691
+#define	MSG_DF1_NODIRECT_SIZE	8
+
+#define	MSG_DF1_IGNMULDEF	782
+#define	MSG_DF1_IGNMULDEF_SIZE	14
+
+#define	MSG_DF1_NOKSYMS	797
+#define	MSG_DF1_NOKSYMS_SIZE	7
+
+#define	MSG_DF1_NOHDR	805
+#define	MSG_DF1_NOHDR_SIZE	5
+
+#define	MSG_DF1_EDITED	811
+#define	MSG_DF1_EDITED_SIZE	6
+
+#define	MSG_DF1_NORELOC	818
+#define	MSG_DF1_NORELOC_SIZE	7
+
+#define	MSG_DF1_SYMINTPOSE	826
+#define	MSG_DF1_SYMINTPOSE_SIZE	16
+
+#define	MSG_DF1_GLOBAUDIT	843
+#define	MSG_DF1_GLOBAUDIT_SIZE	15
+
+#define	MSG_DF1_SINGLETON	859
+#define	MSG_DF1_SINGLETON_SIZE	16
+
+#define	MSG_DFP_LAZYLOAD	876
+#define	MSG_DFP_LAZYLOAD_SIZE	4
+
+#define	MSG_DFP_LAZYLOAD_ALT	881
+#define	MSG_DFP_LAZYLOAD_ALT_SIZE	8
+
+#define	MSG_DFP_GROUPPERM	890
+#define	MSG_DFP_GROUPPERM_SIZE	9
+
+#define	MSG_DTF_PARINIT	92
+#define	MSG_DTF_PARINIT_SIZE	7
+
+#define	MSG_DTF_CONFEXP	900
+#define	MSG_DTF_CONFEXP_SIZE	7
+
+#define	MSG_BND_NEEDED	6
+#define	MSG_BND_NEEDED_SIZE	6
+
+#define	MSG_BND_REFER	908
+#define	MSG_BND_REFER_SIZE	10
+
+#define	MSG_BND_FILTER	297
+#define	MSG_BND_FILTER_SIZE	6
+
+#define	MSG_BND_ADDED	919
+#define	MSG_BND_ADDED_SIZE	13
+
+#define	MSG_BND_REEVAL	933
+#define	MSG_BND_REEVAL_SIZE	19
+
+#define	MSG_BND_DELETED	953
+#define	MSG_BND_DELETED_SIZE	15
+
+#define	MSG_BND_ATEXIT	969
+#define	MSG_BND_ATEXIT_SIZE	17
+
+#define	MSG_BND_REVISIT	987
+#define	MSG_BND_REVISIT_SIZE	12
+
+#define	MSG_STR_EMPTY	0
+#define	MSG_STR_EMPTY_SIZE	0
+
+#define	MSG_GBL_ZERO	1000
+#define	MSG_GBL_ZERO_SIZE	1
+
+static const char __sgs_msg[1002] = { 
+/*    0 */ 0x00,  0x4e,  0x55,  0x4c,  0x4c,  0x00,  0x4e,  0x45,  0x45,  0x44,
+/*   10 */ 0x45,  0x44,  0x00,  0x50,  0x4c,  0x54,  0x52,  0x45,  0x4c,  0x53,
+/*   20 */ 0x5a,  0x00,  0x50,  0x4c,  0x54,  0x53,  0x5a,  0x00,  0x50,  0x4c,
+/*   30 */ 0x54,  0x47,  0x4f,  0x54,  0x00,  0x48,  0x41,  0x53,  0x48,  0x00,
+/*   40 */ 0x53,  0x54,  0x52,  0x54,  0x41,  0x42,  0x00,  0x53,  0x55,  0x4e,
+/*   50 */ 0x57,  0x5f,  0x53,  0x59,  0x4d,  0x54,  0x41,  0x42,  0x00,  0x52,
+/*   60 */ 0x45,  0x4c,  0x41,  0x00,  0x52,  0x45,  0x4c,  0x41,  0x53,  0x5a,
+/*   70 */ 0x00,  0x52,  0x45,  0x4c,  0x41,  0x45,  0x4e,  0x54,  0x00,  0x53,
+/*   80 */ 0x54,  0x52,  0x53,  0x5a,  0x00,  0x53,  0x59,  0x4d,  0x45,  0x4e,
+/*   90 */ 0x54,  0x00,  0x50,  0x41,  0x52,  0x49,  0x4e,  0x49,  0x54,  0x00,
+/*  100 */ 0x46,  0x49,  0x4e,  0x49,  0x00,  0x53,  0x4f,  0x4e,  0x41,  0x4d,
+/*  110 */ 0x45,  0x00,  0x52,  0x50,  0x41,  0x54,  0x48,  0x00,  0x53,  0x59,
+/*  120 */ 0x4d,  0x42,  0x4f,  0x4c,  0x49,  0x43,  0x00,  0x53,  0x59,  0x4d,
+/*  130 */ 0x42,  0x00,  0x4a,  0x4d,  0x50,  0x52,  0x45,  0x4c,  0x00,  0x52,
+/*  140 */ 0x45,  0x4c,  0x45,  0x4e,  0x54,  0x00,  0x50,  0x4c,  0x54,  0x50,
+/*  150 */ 0x41,  0x44,  0x00,  0x50,  0x4c,  0x54,  0x50,  0x41,  0x44,  0x53,
+/*  160 */ 0x5a,  0x00,  0x50,  0x4c,  0x54,  0x52,  0x45,  0x4c,  0x00,  0x44,
+/*  170 */ 0x45,  0x42,  0x55,  0x47,  0x00,  0x54,  0x45,  0x58,  0x54,  0x52,
+/*  180 */ 0x45,  0x4c,  0x00,  0x42,  0x49,  0x4e,  0x44,  0x5f,  0x4e,  0x4f,
+/*  190 */ 0x57,  0x00,  0x50,  0x52,  0x45,  0x49,  0x4e,  0x49,  0x54,  0x5f,
+/*  200 */ 0x41,  0x52,  0x52,  0x41,  0x59,  0x00,  0x46,  0x49,  0x4e,  0x49,
+/*  210 */ 0x5f,  0x41,  0x52,  0x52,  0x41,  0x59,  0x00,  0x50,  0x52,  0x45,
+/*  220 */ 0x49,  0x4e,  0x49,  0x54,  0x5f,  0x41,  0x52,  0x52,  0x41,  0x59,
+/*  230 */ 0x53,  0x5a,  0x00,  0x46,  0x49,  0x4e,  0x49,  0x5f,  0x41,  0x52,
+/*  240 */ 0x52,  0x41,  0x59,  0x53,  0x5a,  0x00,  0x52,  0x55,  0x4e,  0x50,
+/*  250 */ 0x41,  0x54,  0x48,  0x00,  0x46,  0x4c,  0x41,  0x47,  0x53,  0x00,
+/*  260 */ 0x52,  0x45,  0x4c,  0x41,  0x43,  0x4f,  0x55,  0x4e,  0x54,  0x00,
+/*  270 */ 0x52,  0x45,  0x4c,  0x43,  0x4f,  0x55,  0x4e,  0x54,  0x00,  0x46,
+/*  280 */ 0x4c,  0x41,  0x47,  0x53,  0x5f,  0x31,  0x00,  0x55,  0x53,  0x45,
+/*  290 */ 0x44,  0x00,  0x53,  0x55,  0x4e,  0x57,  0x5f,  0x46,  0x49,  0x4c,
+/*  300 */ 0x54,  0x45,  0x52,  0x00,  0x53,  0x55,  0x4e,  0x57,  0x5f,  0x41,
+/*  310 */ 0x55,  0x58,  0x49,  0x4c,  0x49,  0x41,  0x52,  0x59,  0x00,  0x43,
+/*  320 */ 0x41,  0x43,  0x48,  0x45,  0x00,  0x56,  0x45,  0x52,  0x53,  0x59,
+/*  330 */ 0x4d,  0x00,  0x56,  0x45,  0x52,  0x44,  0x45,  0x46,  0x00,  0x56,
+/*  340 */ 0x45,  0x52,  0x44,  0x45,  0x46,  0x4e,  0x55,  0x4d,  0x00,  0x56,
+/*  350 */ 0x45,  0x52,  0x4e,  0x45,  0x45,  0x44,  0x00,  0x56,  0x45,  0x52,
+/*  360 */ 0x4e,  0x45,  0x45,  0x44,  0x4e,  0x55,  0x4d,  0x00,  0x53,  0x59,
+/*  370 */ 0x4d,  0x49,  0x4e,  0x46,  0x4f,  0x00,  0x53,  0x59,  0x4d,  0x49,
+/*  380 */ 0x4e,  0x53,  0x5a,  0x00,  0x53,  0x59,  0x4d,  0x49,  0x4e,  0x45,
+/*  390 */ 0x4e,  0x54,  0x00,  0x50,  0x4f,  0x53,  0x46,  0x4c,  0x41,  0x47,
+/*  400 */ 0x5f,  0x31,  0x00,  0x46,  0x45,  0x41,  0x54,  0x55,  0x52,  0x45,
+/*  410 */ 0x5f,  0x31,  0x00,  0x4d,  0x4f,  0x56,  0x45,  0x53,  0x5a,  0x00,
+/*  420 */ 0x4d,  0x4f,  0x56,  0x45,  0x45,  0x4e,  0x54,  0x00,  0x4d,  0x4f,
+/*  430 */ 0x56,  0x45,  0x54,  0x41,  0x42,  0x00,  0x52,  0x45,  0x47,  0x49,
+/*  440 */ 0x53,  0x54,  0x45,  0x52,  0x00,  0x43,  0x48,  0x45,  0x43,  0x4b,
+/*  450 */ 0x53,  0x55,  0x4d,  0x00,  0x50,  0x4c,  0x54,  0x5f,  0x52,  0x45,
+/*  460 */ 0x53,  0x45,  0x52,  0x56,  0x45,  0x00,  0x44,  0x45,  0x50,  0x41,
+/*  470 */ 0x55,  0x44,  0x49,  0x54,  0x00,  0x43,  0x4f,  0x4e,  0x46,  0x49,
+/*  480 */ 0x47,  0x00,  0x53,  0x55,  0x4e,  0x57,  0x5f,  0x52,  0x54,  0x4c,
+/*  490 */ 0x44,  0x49,  0x4e,  0x46,  0x00,  0x53,  0x55,  0x4e,  0x57,  0x5f,
+/*  500 */ 0x43,  0x41,  0x50,  0x00,  0x53,  0x55,  0x4e,  0x57,  0x5f,  0x53,
+/*  510 */ 0x59,  0x4d,  0x53,  0x5a,  0x00,  0x53,  0x55,  0x4e,  0x57,  0x5f,
+/*  520 */ 0x53,  0x4f,  0x52,  0x54,  0x45,  0x4e,  0x54,  0x00,  0x53,  0x55,
+/*  530 */ 0x4e,  0x57,  0x5f,  0x53,  0x59,  0x4d,  0x53,  0x4f,  0x52,  0x54,
+/*  540 */ 0x00,  0x53,  0x55,  0x4e,  0x57,  0x5f,  0x53,  0x59,  0x4d,  0x53,
+/*  550 */ 0x4f,  0x52,  0x54,  0x53,  0x5a,  0x00,  0x53,  0x55,  0x4e,  0x57,
+/*  560 */ 0x5f,  0x54,  0x4c,  0x53,  0x53,  0x4f,  0x52,  0x54,  0x00,  0x53,
+/*  570 */ 0x55,  0x4e,  0x57,  0x5f,  0x54,  0x4c,  0x53,  0x53,  0x4f,  0x52,
+/*  580 */ 0x54,  0x53,  0x5a,  0x00,  0x53,  0x55,  0x4e,  0x57,  0x5f,  0x53,
+/*  590 */ 0x54,  0x52,  0x50,  0x41,  0x44,  0x00,  0x53,  0x55,  0x4e,  0x57,
+/*  600 */ 0x5f,  0x4c,  0x44,  0x4d,  0x41,  0x43,  0x48,  0x00,  0x4f,  0x52,
+/*  610 */ 0x49,  0x47,  0x49,  0x4e,  0x00,  0x53,  0x54,  0x41,  0x54,  0x49,
+/*  620 */ 0x43,  0x5f,  0x54,  0x4c,  0x53,  0x00,  0x47,  0x4c,  0x4f,  0x42,
+/*  630 */ 0x41,  0x4c,  0x00,  0x47,  0x52,  0x4f,  0x55,  0x50,  0x00,  0x4e,
+/*  640 */ 0x4f,  0x44,  0x45,  0x4c,  0x45,  0x54,  0x45,  0x00,  0x4c,  0x4f,
+/*  650 */ 0x41,  0x44,  0x46,  0x4c,  0x54,  0x52,  0x00,  0x49,  0x4e,  0x49,
+/*  660 */ 0x54,  0x46,  0x49,  0x52,  0x53,  0x54,  0x00,  0x4f,  0x42,  0x4a,
+/*  670 */ 0x45,  0x43,  0x54,  0x2d,  0x49,  0x4e,  0x54,  0x45,  0x52,  0x50,
+/*  680 */ 0x4f,  0x53,  0x45,  0x00,  0x4e,  0x4f,  0x4f,  0x50,  0x45,  0x4e,
+/*  690 */ 0x00,  0x4e,  0x4f,  0x44,  0x49,  0x52,  0x45,  0x43,  0x54,  0x00,
+/*  700 */ 0x54,  0x52,  0x41,  0x4e,  0x53,  0x00,  0x4e,  0x4f,  0x44,  0x45,
+/*  710 */ 0x46,  0x4c,  0x49,  0x42,  0x00,  0x4e,  0x4f,  0x44,  0x55,  0x4d,
+/*  720 */ 0x50,  0x00,  0x43,  0x4f,  0x4e,  0x46,  0x41,  0x4c,  0x54,  0x00,
+/*  730 */ 0x45,  0x4e,  0x44,  0x46,  0x49,  0x4c,  0x54,  0x45,  0x45,  0x00,
+/*  740 */ 0x44,  0x49,  0x53,  0x50,  0x4c,  0x41,  0x43,  0x45,  0x2d,  0x52,
+/*  750 */ 0x45,  0x4c,  0x4f,  0x43,  0x53,  0x2d,  0x50,  0x45,  0x4e,  0x44,
+/*  760 */ 0x00,  0x44,  0x49,  0x53,  0x50,  0x4c,  0x41,  0x43,  0x45,  0x2d,
+/*  770 */ 0x52,  0x45,  0x4c,  0x4f,  0x43,  0x53,  0x2d,  0x44,  0x4f,  0x4e,
+/*  780 */ 0x45,  0x00,  0x49,  0x47,  0x4e,  0x4f,  0x52,  0x45,  0x2d,  0x4d,
+/*  790 */ 0x55,  0x4c,  0x44,  0x45,  0x46,  0x53,  0x00,  0x4e,  0x4f,  0x4b,
+/*  800 */ 0x53,  0x59,  0x4d,  0x53,  0x00,  0x4e,  0x4f,  0x48,  0x44,  0x52,
+/*  810 */ 0x00,  0x45,  0x44,  0x49,  0x54,  0x45,  0x44,  0x00,  0x4e,  0x4f,
+/*  820 */ 0x52,  0x45,  0x4c,  0x4f,  0x43,  0x00,  0x53,  0x59,  0x4d,  0x42,
+/*  830 */ 0x4f,  0x4c,  0x2d,  0x49,  0x4e,  0x54,  0x45,  0x52,  0x50,  0x4f,
+/*  840 */ 0x53,  0x45,  0x00,  0x47,  0x4c,  0x4f,  0x42,  0x41,  0x4c,  0x2d,
+/*  850 */ 0x41,  0x55,  0x44,  0x49,  0x54,  0x49,  0x4e,  0x47,  0x00,  0x53,
+/*  860 */ 0x49,  0x4e,  0x47,  0x4c,  0x45,  0x54,  0x4f,  0x4e,  0x2d,  0x45,
+/*  870 */ 0x58,  0x49,  0x53,  0x54,  0x53,  0x00,  0x4c,  0x41,  0x5a,  0x59,
+/*  880 */ 0x00,  0x4c,  0x41,  0x5a,  0x59,  0x4c,  0x4f,  0x41,  0x44,  0x00,
+/*  890 */ 0x47,  0x52,  0x4f,  0x55,  0x50,  0x50,  0x45,  0x52,  0x4d,  0x00,
+/*  900 */ 0x43,  0x4f,  0x4e,  0x46,  0x45,  0x58,  0x50,  0x00,  0x52,  0x45,
+/*  910 */ 0x46,  0x45,  0x52,  0x45,  0x4e,  0x43,  0x45,  0x44,  0x00,  0x4f,
+/*  920 */ 0x42,  0x4a,  0x45,  0x43,  0x54,  0x53,  0x2d,  0x41,  0x44,  0x44,
+/*  930 */ 0x45,  0x44,  0x00,  0x4f,  0x42,  0x4a,  0x45,  0x43,  0x54,  0x53,
+/*  940 */ 0x2d,  0x52,  0x45,  0x45,  0x56,  0x41,  0x4c,  0x55,  0x41,  0x54,
+/*  950 */ 0x45,  0x44,  0x00,  0x4f,  0x42,  0x4a,  0x45,  0x43,  0x54,  0x53,
+/*  960 */ 0x2d,  0x44,  0x45,  0x4c,  0x45,  0x54,  0x45,  0x44,  0x00,  0x41,
+/*  970 */ 0x54,  0x45,  0x58,  0x49,  0x54,  0x2d,  0x50,  0x52,  0x4f,  0x43,
+/*  980 */ 0x45,  0x53,  0x53,  0x49,  0x4e,  0x47,  0x00,  0x28,  0x72,  0x65,
+/*  990 */ 0x76,  0x69,  0x73,  0x69,  0x74,  0x69,  0x6e,  0x67,  0x29,  0x00,
+/* 1000 */ 0x30,  0x00 };
+
+#else	/* __lint */
+
+
+typedef char *	Msg;
+
+extern	const char *	_sgs_msg(Msg);
+
+#define MSG_ORIG(x)	x
+#define MSG_INTL(x)	x
+
+#define	MSG_DYN_NULL	"NULL"
+#define	MSG_DYN_NULL_SIZE	4
+
+#define	MSG_DYN_NEEDED	"NEEDED"
+#define	MSG_DYN_NEEDED_SIZE	6
+
+#define	MSG_DYN_PLTRELSZ	"PLTRELSZ"
+#define	MSG_DYN_PLTRELSZ_SIZE	8
+
+#define	MSG_DYN_PLTRELSZ_ALT	"PLTSZ"
+#define	MSG_DYN_PLTRELSZ_ALT_SIZE	5
+
+#define	MSG_DYN_PLTGOT	"PLTGOT"
+#define	MSG_DYN_PLTGOT_SIZE	6
+
+#define	MSG_DYN_HASH	"HASH"
+#define	MSG_DYN_HASH_SIZE	4
+
+#define	MSG_DYN_STRTAB	"STRTAB"
+#define	MSG_DYN_STRTAB_SIZE	6
+
+#define	MSG_DYN_SYMTAB	"SYMTAB"
+#define	MSG_DYN_SYMTAB_SIZE	6
+
+#define	MSG_DYN_RELA	"RELA"
+#define	MSG_DYN_RELA_SIZE	4
+
+#define	MSG_DYN_RELASZ	"RELASZ"
+#define	MSG_DYN_RELASZ_SIZE	6
+
+#define	MSG_DYN_RELAENT	"RELAENT"
+#define	MSG_DYN_RELAENT_SIZE	7
+
+#define	MSG_DYN_STRSZ	"STRSZ"
+#define	MSG_DYN_STRSZ_SIZE	5
+
+#define	MSG_DYN_SYMENT	"SYMENT"
+#define	MSG_DYN_SYMENT_SIZE	6
+
+#define	MSG_DYN_INIT	"INIT"
+#define	MSG_DYN_INIT_SIZE	4
+
+#define	MSG_DYN_FINI	"FINI"
+#define	MSG_DYN_FINI_SIZE	4
+
+#define	MSG_DYN_SONAME	"SONAME"
+#define	MSG_DYN_SONAME_SIZE	6
+
+#define	MSG_DYN_RPATH	"RPATH"
+#define	MSG_DYN_RPATH_SIZE	5
+
+#define	MSG_DYN_SYMBOLIC	"SYMBOLIC"
+#define	MSG_DYN_SYMBOLIC_SIZE	8
+
+#define	MSG_DYN_SYMBOLIC_ALT	"SYMB"
+#define	MSG_DYN_SYMBOLIC_ALT_SIZE	4
+
+#define	MSG_DYN_REL	"REL"
+#define	MSG_DYN_REL_SIZE	3
+
+#define	MSG_DYN_RELSZ	"RELSZ"
+#define	MSG_DYN_RELSZ_SIZE	5
+
+#define	MSG_DYN_RELENT	"RELENT"
+#define	MSG_DYN_RELENT_SIZE	6
+
+#define	MSG_DYN_PLTPAD	"PLTPAD"
+#define	MSG_DYN_PLTPAD_SIZE	6
+
+#define	MSG_DYN_PLTPADSZ	"PLTPADSZ"
+#define	MSG_DYN_PLTPADSZ_SIZE	8
+
+#define	MSG_DYN_PLTREL	"PLTREL"
+#define	MSG_DYN_PLTREL_SIZE	6
+
+#define	MSG_DYN_DEBUG	"DEBUG"
+#define	MSG_DYN_DEBUG_SIZE	5
+
+#define	MSG_DYN_TEXTREL	"TEXTREL"
+#define	MSG_DYN_TEXTREL_SIZE	7
+
+#define	MSG_DYN_JMPREL	"JMPREL"
+#define	MSG_DYN_JMPREL_SIZE	6
+
+#define	MSG_DYN_BIND_NOW	"BIND_NOW"
+#define	MSG_DYN_BIND_NOW_SIZE	8
+
+#define	MSG_DYN_INIT_ARRAY	"INIT_ARRAY"
+#define	MSG_DYN_INIT_ARRAY_SIZE	10
+
+#define	MSG_DYN_FINI_ARRAY	"FINI_ARRAY"
+#define	MSG_DYN_FINI_ARRAY_SIZE	10
+
+#define	MSG_DYN_INIT_ARRAYSZ	"INIT_ARRAYSZ"
+#define	MSG_DYN_INIT_ARRAYSZ_SIZE	12
+
+#define	MSG_DYN_FINI_ARRAYSZ	"FINI_ARRAYSZ"
+#define	MSG_DYN_FINI_ARRAYSZ_SIZE	12
+
+#define	MSG_DYN_RUNPATH	"RUNPATH"
+#define	MSG_DYN_RUNPATH_SIZE	7
+
+#define	MSG_DYN_FLAGS	"FLAGS"
+#define	MSG_DYN_FLAGS_SIZE	5
+
+#define	MSG_DYN_PREINIT_ARRAY	"PREINIT_ARRAY"
+#define	MSG_DYN_PREINIT_ARRAY_SIZE	13
+
+#define	MSG_DYN_PREINIT_ARRAYSZ	"PREINIT_ARRAYSZ"
+#define	MSG_DYN_PREINIT_ARRAYSZ_SIZE	15
+
+#define	MSG_DYN_RELACOUNT	"RELACOUNT"
+#define	MSG_DYN_RELACOUNT_SIZE	9
+
+#define	MSG_DYN_RELCOUNT	"RELCOUNT"
+#define	MSG_DYN_RELCOUNT_SIZE	8
+
+#define	MSG_DYN_FLAGS_1	"FLAGS_1"
+#define	MSG_DYN_FLAGS_1_SIZE	7
+
+#define	MSG_DYN_USED	"USED"
+#define	MSG_DYN_USED_SIZE	4
+
+#define	MSG_DYN_FILTER	"FILTER"
+#define	MSG_DYN_FILTER_SIZE	6
+
+#define	MSG_DYN_AUXILIARY	"AUXILIARY"
+#define	MSG_DYN_AUXILIARY_SIZE	9
+
+#define	MSG_DYN_CACHE	"CACHE"
+#define	MSG_DYN_CACHE_SIZE	5
+
+#define	MSG_DYN_VERSYM	"VERSYM"
+#define	MSG_DYN_VERSYM_SIZE	6
+
+#define	MSG_DYN_VERDEF	"VERDEF"
+#define	MSG_DYN_VERDEF_SIZE	6
+
+#define	MSG_DYN_VERDEFNUM	"VERDEFNUM"
+#define	MSG_DYN_VERDEFNUM_SIZE	9
+
+#define	MSG_DYN_VERNEED	"VERNEED"
+#define	MSG_DYN_VERNEED_SIZE	7
+
+#define	MSG_DYN_VERNEEDNUM	"VERNEEDNUM"
+#define	MSG_DYN_VERNEEDNUM_SIZE	10
+
+#define	MSG_DYN_SYMINFO	"SYMINFO"
+#define	MSG_DYN_SYMINFO_SIZE	7
+
+#define	MSG_DYN_SYMINSZ	"SYMINSZ"
+#define	MSG_DYN_SYMINSZ_SIZE	7
+
+#define	MSG_DYN_SYMINENT	"SYMINENT"
+#define	MSG_DYN_SYMINENT_SIZE	8
+
+#define	MSG_DYN_POSFLAG_1	"POSFLAG_1"
+#define	MSG_DYN_POSFLAG_1_SIZE	9
+
+#define	MSG_DYN_FEATURE_1	"FEATURE_1"
+#define	MSG_DYN_FEATURE_1_SIZE	9
+
+#define	MSG_DYN_MOVESZ	"MOVESZ"
+#define	MSG_DYN_MOVESZ_SIZE	6
+
+#define	MSG_DYN_MOVEENT	"MOVEENT"
+#define	MSG_DYN_MOVEENT_SIZE	7
+
+#define	MSG_DYN_MOVETAB	"MOVETAB"
+#define	MSG_DYN_MOVETAB_SIZE	7
+
+#define	MSG_DYN_REGISTER	"REGISTER"
+#define	MSG_DYN_REGISTER_SIZE	8
+
+#define	MSG_DYN_CHECKSUM	"CHECKSUM"
+#define	MSG_DYN_CHECKSUM_SIZE	8
+
+#define	MSG_DYN_PLTRESERVE	"PLT_RESERVE"
+#define	MSG_DYN_PLTRESERVE_SIZE	11
+
+#define	MSG_DYN_DEPAUDIT	"DEPAUDIT"
+#define	MSG_DYN_DEPAUDIT_SIZE	8
+
+#define	MSG_DYN_AUDIT	"AUDIT"
+#define	MSG_DYN_AUDIT_SIZE	5
+
+#define	MSG_DYN_CONFIG	"CONFIG"
+#define	MSG_DYN_CONFIG_SIZE	6
+
+#define	MSG_DYN_SUNW_AUXILIARY	"SUNW_AUXILIARY"
+#define	MSG_DYN_SUNW_AUXILIARY_SIZE	14
+
+#define	MSG_DYN_SUNW_RTLDINF	"SUNW_RTLDINF"
+#define	MSG_DYN_SUNW_RTLDINF_SIZE	12
+
+#define	MSG_DYN_SUNW_FILTER	"SUNW_FILTER"
+#define	MSG_DYN_SUNW_FILTER_SIZE	11
+
+#define	MSG_DYN_SUNW_CAP	"SUNW_CAP"
+#define	MSG_DYN_SUNW_CAP_SIZE	8
+
+#define	MSG_DYN_SUNW_SYMTAB	"SUNW_SYMTAB"
+#define	MSG_DYN_SUNW_SYMTAB_SIZE	11
+
+#define	MSG_DYN_SUNW_SYMSZ	"SUNW_SYMSZ"
+#define	MSG_DYN_SUNW_SYMSZ_SIZE	10
+
+#define	MSG_DYN_SUNW_SORTENT	"SUNW_SORTENT"
+#define	MSG_DYN_SUNW_SORTENT_SIZE	12
+
+#define	MSG_DYN_SUNW_SYMSORT	"SUNW_SYMSORT"
+#define	MSG_DYN_SUNW_SYMSORT_SIZE	12
+
+#define	MSG_DYN_SUNW_SYMSORTSZ	"SUNW_SYMSORTSZ"
+#define	MSG_DYN_SUNW_SYMSORTSZ_SIZE	14
+
+#define	MSG_DYN_SUNW_TLSSORT	"SUNW_TLSSORT"
+#define	MSG_DYN_SUNW_TLSSORT_SIZE	12
+
+#define	MSG_DYN_SUNW_TLSSORTSZ	"SUNW_TLSSORTSZ"
+#define	MSG_DYN_SUNW_TLSSORTSZ_SIZE	14
+
+#define	MSG_DYN_SUNW_STRPAD	"SUNW_STRPAD"
+#define	MSG_DYN_SUNW_STRPAD_SIZE	11
+
+#define	MSG_DYN_SUNW_LDMACH	"SUNW_LDMACH"
+#define	MSG_DYN_SUNW_LDMACH_SIZE	11
+
+#define	MSG_DF_ORIGIN	"ORIGIN"
+#define	MSG_DF_ORIGIN_SIZE	6
+
+#define	MSG_DF_SYMBOLIC	"SYMBOLIC"
+#define	MSG_DF_SYMBOLIC_SIZE	8
+
+#define	MSG_DF_TEXTREL	"TEXTREL"
+#define	MSG_DF_TEXTREL_SIZE	7
+
+#define	MSG_DF_BIND_NOW	"BIND_NOW"
+#define	MSG_DF_BIND_NOW_SIZE	8
+
+#define	MSG_DF_STATIC_TLS	"STATIC_TLS"
+#define	MSG_DF_STATIC_TLS_SIZE	10
+
+#define	MSG_DF1_NOW	"NOW"
+#define	MSG_DF1_NOW_SIZE	3
+
+#define	MSG_DF1_GLOBAL	"GLOBAL"
+#define	MSG_DF1_GLOBAL_SIZE	6
+
+#define	MSG_DF1_GROUP	"GROUP"
+#define	MSG_DF1_GROUP_SIZE	5
+
+#define	MSG_DF1_NODELETE	"NODELETE"
+#define	MSG_DF1_NODELETE_SIZE	8
+
+#define	MSG_DF1_LOADFLTR	"LOADFLTR"
+#define	MSG_DF1_LOADFLTR_SIZE	8
+
+#define	MSG_DF1_INITFIRST	"INITFIRST"
+#define	MSG_DF1_INITFIRST_SIZE	9
+
+#define	MSG_DF1_INTERPOSE	"OBJECT-INTERPOSE"
+#define	MSG_DF1_INTERPOSE_SIZE	16
+
+#define	MSG_DF1_NOOPEN	"NOOPEN"
+#define	MSG_DF1_NOOPEN_SIZE	6
+
+#define	MSG_DF1_ORIGIN	"ORIGIN"
+#define	MSG_DF1_ORIGIN_SIZE	6
+
+#define	MSG_DF1_DIRECT	"DIRECT"
+#define	MSG_DF1_DIRECT_SIZE	6
+
+#define	MSG_DF1_TRANS	"TRANS"
+#define	MSG_DF1_TRANS_SIZE	5
+
+#define	MSG_DF1_NODEFLIB	"NODEFLIB"
+#define	MSG_DF1_NODEFLIB_SIZE	8
+
+#define	MSG_DF1_NODUMP	"NODUMP"
+#define	MSG_DF1_NODUMP_SIZE	6
+
+#define	MSG_DF1_CONFALT	"CONFALT"
+#define	MSG_DF1_CONFALT_SIZE	7
+
+#define	MSG_DF1_ENDFILTEE	"ENDFILTEE"
+#define	MSG_DF1_ENDFILTEE_SIZE	9
+
+#define	MSG_DF1_DISPRELPND	"DISPLACE-RELOCS-PEND"
+#define	MSG_DF1_DISPRELPND_SIZE	20
+
+#define	MSG_DF1_DISPRELDNE	"DISPLACE-RELOCS-DONE"
+#define	MSG_DF1_DISPRELDNE_SIZE	20
+
+#define	MSG_DF1_NODIRECT	"NODIRECT"
+#define	MSG_DF1_NODIRECT_SIZE	8
+
+#define	MSG_DF1_IGNMULDEF	"IGNORE-MULDEFS"
+#define	MSG_DF1_IGNMULDEF_SIZE	14
+
+#define	MSG_DF1_NOKSYMS	"NOKSYMS"
+#define	MSG_DF1_NOKSYMS_SIZE	7
+
+#define	MSG_DF1_NOHDR	"NOHDR"
+#define	MSG_DF1_NOHDR_SIZE	5
+
+#define	MSG_DF1_EDITED	"EDITED"
+#define	MSG_DF1_EDITED_SIZE	6
+
+#define	MSG_DF1_NORELOC	"NORELOC"
+#define	MSG_DF1_NORELOC_SIZE	7
+
+#define	MSG_DF1_SYMINTPOSE	"SYMBOL-INTERPOSE"
+#define	MSG_DF1_SYMINTPOSE_SIZE	16
+
+#define	MSG_DF1_GLOBAUDIT	"GLOBAL-AUDITING"
+#define	MSG_DF1_GLOBAUDIT_SIZE	15
+
+#define	MSG_DF1_SINGLETON	"SINGLETON-EXISTS"
+#define	MSG_DF1_SINGLETON_SIZE	16
+
+#define	MSG_DFP_LAZYLOAD	"LAZY"
+#define	MSG_DFP_LAZYLOAD_SIZE	4
+
+#define	MSG_DFP_LAZYLOAD_ALT	"LAZYLOAD"
+#define	MSG_DFP_LAZYLOAD_ALT_SIZE	8
+
+#define	MSG_DFP_GROUPPERM	"GROUPPERM"
+#define	MSG_DFP_GROUPPERM_SIZE	9
+
+#define	MSG_DTF_PARINIT	"PARINIT"
+#define	MSG_DTF_PARINIT_SIZE	7
+
+#define	MSG_DTF_CONFEXP	"CONFEXP"
+#define	MSG_DTF_CONFEXP_SIZE	7
+
+#define	MSG_BND_NEEDED	"NEEDED"
+#define	MSG_BND_NEEDED_SIZE	6
+
+#define	MSG_BND_REFER	"REFERENCED"
+#define	MSG_BND_REFER_SIZE	10
+
+#define	MSG_BND_FILTER	"FILTER"
+#define	MSG_BND_FILTER_SIZE	6
+
+#define	MSG_BND_ADDED	"OBJECTS-ADDED"
+#define	MSG_BND_ADDED_SIZE	13
+
+#define	MSG_BND_REEVAL	"OBJECTS-REEVALUATED"
+#define	MSG_BND_REEVAL_SIZE	19
+
+#define	MSG_BND_DELETED	"OBJECTS-DELETED"
+#define	MSG_BND_DELETED_SIZE	15
+
+#define	MSG_BND_ATEXIT	"ATEXIT-PROCESSING"
+#define	MSG_BND_ATEXIT_SIZE	17
+
+#define	MSG_BND_REVISIT	"(revisiting)"
+#define	MSG_BND_REVISIT_SIZE	12
+
+#define	MSG_STR_EMPTY	""
+#define	MSG_STR_EMPTY_SIZE	0
+
+#define	MSG_GBL_ZERO	"0"
+#define	MSG_GBL_ZERO_SIZE	1
+
+#endif	/* __lint */
+
+#endif

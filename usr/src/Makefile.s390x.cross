@@ -1,0 +1,65 @@
+#
+# CDDL HEADER START
+#
+# The contents of this file are subject to the terms of the
+# Common Development and Distribution License (the "License").
+# You may not use this file except in compliance with the License.
+#
+# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+# or http://www.opensolaris.org/os/licensing.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+#
+# When distributing Covered Code, include this CDDL HEADER in each
+# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+# If applicable, add the following below this CDDL HEADER, with the
+# fields enclosed by brackets "[]" replaced with your own identifying
+# information: Portions Copyright [yyyy] [name of copyright owner]
+#
+# CDDL HEADER END
+#
+# Copyright 2008 Sine Nomine Associates. All rights reserved.
+# Use is subject to license terms.
+#
+
+#
+# Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
+# Use is subject to license terms.
+#
+
+#
+# We have to cross-compile s390x on s390x therefore we need to generate
+# tools and commands using the s390x compilers as that's where these 
+# things will be running for the kernel and library we use the stuff 
+# that will generate zArchitecture opcodes
+#
+CW_NO_SHADOW=		1
+NATIVE_MACH=		sparc
+CROSS_C=		$(ONBLD_TOOLS)/bin/sparc/cw -_cc
+s390x_CC=		$(CROSS_C) -D__s390x
+s390x_CCC=		$(CROSS_C) -D__s390x
+s390x_CPP=		$(GNU_ROOT)/bin/cpp
+s390x_CPP=		/usr/ccs/lib/cpp
+s390x_AS=		/usr/ccs/bin/as -xregsym=no
+s390x_LD=		/usr/ccs/bin/ld
+s390x_LINT=		$(SPRO_VROOT)/bin/lint
+s390x_XARCH=		$(sparcv9_XARCH)
+s390x_CFLAGS=		$(sparcv9_CFLAGS) -D__s390x -D__s390
+s390x_COPTFLAG=		$(sparcv9_COPTFLAG)
+s390_CC=		$(CROSS_C) -D__s390
+s390_CCC=		$(CROSS_C) -D__s390
+s390_CPP=		$(GNU_ROOT)/bin/cpp
+s390_CPP=		/usr/ccs/lib/cpp
+s390_AS=		/usr/ccs/bin/as -xregsym=no
+s390_LD=		/usr/ccs/bin/ld
+s390_LINT=		$(SPRO_VROOT)/bin/lint
+s390_XARCH=		$(sparc_XARCH)
+s390_CFLAGS=		$(sparc_CFLAGS) -D__s390
+s390_COPTFLAG=		$(sparc_COPTFLAG)
+LINK.c=		$(CROSS_C) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
+LINK64.c=	$(CROSS_C) $(CFLAGS64) $(CPPFLAGS) $(LDFLAGS)
+NORUNPATH=	-norunpath -nolib
+LINK.cc=	$(CROSS_C) $(CCFLAGS) $(CPPFLAGS) $(NORUNPATH) \
+		$(LDFLAGS) $(CCNEEDED)
+LINK64.cc=	$(CROSS_C) $(CCFLAGS64) $(CPPFLAGS) $(NORUNPATH) \
+		$(LDFLAGS) $(CCNEEDED)

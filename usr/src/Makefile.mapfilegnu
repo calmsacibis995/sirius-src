@@ -1,0 +1,21 @@
+
+# Makefile stub used for helper in building mapfiles from asm
+# This is to resolve the use of mapfiles with GNU build tools
+#
+# NOTE: This process will go away in production builds (using Solaris ld)
+#
+
+#OBJECTS := mapfile.o $(OBJECTS)
+#
+OBJECTS +=  mapfile.o
+
+
+CLEANFILES += mapfile.s 
+
+mapfile.s: $(MAPFILES)
+	cat $(MAPFILES) | $(SRC)/tools/mapfile_gassifier/mapfile_gassifier > mapfile.s
+
+pics/mapfile.o: mapfile.s
+	$(AS) $(ASFLAGS) mapfile.s  $< -o $@
+	$(POST_PROCESS_O)
+#
